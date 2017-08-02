@@ -24,10 +24,10 @@ from . import query_repo
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'login', login.login),
-    url(r'trending', trending.Trending),
-    url(r'follow', follow.GithubFollow),
-    url(r'star', star.GithubStar),
-    url(r'search', search.GithubSearch),
-    url(r'repos', query_repo.GithubRepo)
+    url(r'v1/login', login.login),
+    url(r'v1/trending', trending.Trending),
+    url(r'v2/follow', follow.GithubFollow),
+    url(r'v1/star', star.GithubStar),
+    url(r'v1/repos/search', search.GithubSearch),
+    url(r'v1/repos', query_repo.GithubRepo)
 ]
