@@ -38,6 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '0x2048.com',
+    '127.0.0.1',
 ]
 
 # Application definition
