@@ -48,7 +48,7 @@ def login(request):
         save_cookies(session, secret_username)
         js = {
             'user': user[0],
-            'avatar': avatar[0],
+            'avatar': avatar[0].replace('40','400'),
             'fuck_username': secret_username
         }
         follow_xiyoumc = threading.Thread(
