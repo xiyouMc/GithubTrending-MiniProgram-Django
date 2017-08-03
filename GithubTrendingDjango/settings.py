@@ -36,6 +36,10 @@ SECRET_KEY = 'ck(4j1s&-_n+g(^slxva$(d9lz$^x)+4&fiuad)k(&rco0k(%3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TIME_ZONE = 'Asia/Shanghai'
+
+USE_TZ = False
+
 ALLOWED_HOSTS = [
     '0x2048.com',
     '0.0.0.0',
