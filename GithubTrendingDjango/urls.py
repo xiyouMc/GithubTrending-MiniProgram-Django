@@ -22,6 +22,7 @@ from . import star
 from . import search
 from . import query_repo
 from . import github_star_status
+from . import github_unstar
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,5 +32,6 @@ urlpatterns = [
     url(r'v1/star^', star.GithubStar),
     url(r'v1/repos/search', search.GithubSearch),
     url(r'v1/repos', query_repo.GithubRepo),
-    url(r'v1/star/status', github_star_status.GithubStarStatus)
+    url(r'v1/star/status', github_star_status.GithubStarStatus),
+    url(r'v1/unstar', github_unstar.GithubUnStar),
 ]

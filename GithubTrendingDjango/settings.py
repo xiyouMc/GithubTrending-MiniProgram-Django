@@ -38,6 +38,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '0x2048.com',
+    '0.0.0.0',
+    'avatars0.githubusercontent.com',
     '127.0.0.1',
 ]
 
