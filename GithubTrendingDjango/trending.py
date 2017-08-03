@@ -5,10 +5,17 @@ import urllib
 import settings
 import os
 import util
+from GithubModel.models import IP
 
 
 def Trending(request):
     if 'since' in request.GET:
+        if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+            ip = request.META['HTTP_X_FORWARDED_FOR']
+        else:
+            ip = request.META['REMOTE_ADDR']
+        i = IP(ip=ip)
+        i.save()
         if not os.path.exists(settings.dirs):
             os.mkdir(settings.dirs)
         since = request.GET['since']
