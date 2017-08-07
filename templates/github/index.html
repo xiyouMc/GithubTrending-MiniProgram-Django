@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    <div id='container' style='width:550px; height:400px; margin:0 auto'></div>
+
+    <script>
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'column',
+                    margin: [50, 50, 100, 80]
+                },
+                title: {
+                    text: '网站访问数据'
+                },
+                xAxis: {
+                    categories: {{ categories | safe }},
+            labels: {
+                rotation: 0,
+                align: 'right',
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '访问量'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '访问量: <b>{point.y:.1f}</b>',
+            },
+            series: [{
+                name: '今天的日志',
+                data: {{ data }},
+                dataLabels: {
+                enabled: false,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
+        }]
+    });
+});
+    </script>
+    <div id="container" style="min-width:700px;height:400px"></div>
+
+</body>
+
+</html>

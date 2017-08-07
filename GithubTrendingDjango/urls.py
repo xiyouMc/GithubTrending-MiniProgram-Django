@@ -23,7 +23,10 @@ from . import search
 from . import query_repo
 from . import github_star_status
 from . import github_unstar
-
+import settings
+from GithubCharts import views
+from GithubModel import views as Github_views
+from . import image
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'v1/login', login.login),
@@ -34,4 +37,9 @@ urlpatterns = [
     url(r'v1/repos', query_repo.GithubRepo),
     url(r'v1/star/status', github_star_status.GithubStarStatus),
     url(r'v1/unstar', github_unstar.GithubUnStar),
+    url(r'v1/search.html', views.SearchView),
+    url(r'v1/index.html', Github_views.index),
+    url(r'v1/image/', image.Image)
+    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    #     {'document_root': settings.STATIC_ROOT}),
 ]

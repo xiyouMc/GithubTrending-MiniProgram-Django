@@ -15,5 +15,5 @@ def GithubSearch(request):
         se.save()
         q = urllib.quote(str(q))
         api = SEARCH_API % q
-        r = requests.get(api, headers=header, verify=False)
+        r = requests.get(api, verify=False)
         return HttpResponse(r.text)

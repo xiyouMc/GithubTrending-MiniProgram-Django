@@ -13,9 +13,9 @@ class Users(models.Model):
 class Search(models.Model):
     username = models.CharField(max_length=20)
     search = models.CharField(max_length=20)
-    date = models.DateTimeField('查询时间', default = timezone.now)
+    date = models.DateTimeField('查询时间', default=timezone.now)
 
 
 class IP(models.Model):
     ip = models.CharField(max_length=20)
-    data = models.DateTimeField('当前时间', default = timezone.now)
+    data = models.DateTimeField('当前时间', default=timezone.now)
