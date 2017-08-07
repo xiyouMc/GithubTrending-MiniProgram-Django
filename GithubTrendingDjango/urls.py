@@ -40,6 +40,4 @@ urlpatterns = [
     url(r'v1/search.html', views.SearchView),
     url(r'v1/index.html', Github_views.index),
     url(r'v1/image/', image.Image)
-    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-    #     {'document_root': settings.STATIC_ROOT}),
 ]
