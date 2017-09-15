@@ -43,7 +43,7 @@ def GithubStarStatus(request):
 
 
 def status(repo, model):
-    repo_content = model.s.get('https://github.com/' + repo, verify=False)
+    repo_content = model.s.get('https://github.com/' + repo)
     is_star = re.findall('starring-container on', repo_content.text)
     print is_star
     if not is_star:
