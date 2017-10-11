@@ -11,7 +11,7 @@ def GithubUnStar(request):
         username = request.GET['username']
         s.cookies = read_cookies(username)
         star = s.get('https://github.com/' + repo, verify=False)
-        auto_token_content = re.findall(repo + '/star"(.*?)</div>', star.text)
+        auto_token_content = re.findall(repo + '/unstar"(.*?)</div>', star.text)
         print auto_token_content
         data = {
             'utf8': '%E2%9C%93',
