@@ -13,11 +13,12 @@ def GithubRepo(request):
         m2 = hashlib.md5()
         m2.update(github_url)
         url_md5 = m2.hexdigest()
-        if os.path.exists(settings.dirs + '/' + _get_time() + url_md5):
-            with open(settings.dirs + '/' + _get_time() + url_md5, 'r') as f:
-                c = f.readline()
-                if c is not None:
-                    return HttpResponse(c)
+        if 'received_events' not in github_url:
+            if os.path.exists(settings.dirs + '/' + _get_time() + url_md5):
+                with open(settings.dirs + '/' + _get_time() + url_md5, 'r') as f:
+                    c = f.readline()
+                    if c is not None:
+                        return HttpResponse(c)
         _json = requests.get(github_url, verify=False, headers=settings.header)
         if 'README.md' in github_url:
             github_url = github_url.replace('README.md', '')
