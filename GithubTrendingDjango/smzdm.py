@@ -6,6 +6,7 @@ import hashlib
 
 def Coupon(request):
     try:
+        print request.method
         if request.GET:
             signature = request.GET.get('signature')
             timestamp = request.GET.get('timestamp')
