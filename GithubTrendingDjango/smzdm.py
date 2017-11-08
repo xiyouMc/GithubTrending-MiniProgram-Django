@@ -25,6 +25,7 @@ def Coupon(request):
                 a = {"errorcode": '-1'}
                 return HttpResponse(a)
         elif request.method == 'POST':
+            print dir(request.POST)
             fromUserName = request.POST.get('FromUserName')
             createTime = request.POST.get('CreateTime')
             msgType = request.POST.get('MsgType')
