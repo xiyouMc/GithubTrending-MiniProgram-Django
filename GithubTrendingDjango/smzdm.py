@@ -7,7 +7,7 @@ import hashlib
 def Coupon(request):
     try:
         print request.method
-        if request.GET:
+        if request.method == 'GET':
             signature = request.GET.get('signature')
             timestamp = request.GET.get('timestamp')
             nonce = request.GET.get('nonce')
@@ -24,14 +24,14 @@ def Coupon(request):
             else:
                 a = {"errorcode": '-1'}
                 return HttpResponse(a)
-        elif request.POST:
+        elif request.method == 'POST':
             fromUserName = request.POST.get('FromUserName')
             createTime = request.POST.get('CreateTime')
             msgType = request.POST.get('MsgType')
             js = {
-                'fromUserName':fromUserName,
-                'createTime':createTime,
-                'msgType':msgType
+                'fromUserName': fromUserName,
+                'createTime': createTime,
+                'msgType': msgType
             }
             return HttpResponse(json.dumps(js))
     except Exception, Argument:
