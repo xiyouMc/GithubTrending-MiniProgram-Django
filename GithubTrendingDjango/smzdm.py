@@ -29,10 +29,11 @@ def Coupon(request):
             fromUserName = request.POST.get('FromUserName')
             createTime = request.POST.get('CreateTime')
             msgType = request.POST.get('MsgType')
+            print fromUserName,fromUserName,msgType
             js = {
-                'fromUserName': fromUserName,
-                'createTime': createTime,
-                'msgType': msgType
+                'fromUserName': 'fromUserName',
+                'createTime': 'createTime',
+                'msgType': 'msgType'
             }
             return HttpResponse(json.dumps(js))
     except Exception, Argument:
