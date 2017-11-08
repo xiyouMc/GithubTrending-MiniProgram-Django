@@ -26,7 +26,7 @@ from . import github_unstar
 import settings
 from GithubModel import views as Github_views
 from . import image
-from . from smzdm
+from . import smzdm
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'v1/login', login.login),
