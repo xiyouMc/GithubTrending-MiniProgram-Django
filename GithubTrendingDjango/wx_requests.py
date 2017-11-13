@@ -88,7 +88,7 @@ def userInfo(redisData,toUser,fromUser):
                                 'https://python.0x2048.com')
 
     # replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
-    return replyMsg.send()
+    return replyImgMsg.send()
 
 
 def _get_redis_task(key):
