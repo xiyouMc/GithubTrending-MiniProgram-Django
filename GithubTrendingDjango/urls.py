@@ -25,6 +25,7 @@ from . import github_star_status
 from . import github_unstar
 import settings
 from GithubModel import views as Github_views
+from Instagram import views as InsViews
 from . import image
 from . import wx_requests
 urlpatterns = [
@@ -39,5 +40,7 @@ urlpatterns = [
     url(r'v1/unstar', github_unstar.GithubUnStar),
     url(r'v1/index.html', Github_views.index),
     url(r'v1/image/', image.Image),
-    url(r'wx/',wx_requests.Coupon)
+    url(r'wx/',wx_requests.Coupon),
+    url(r'^q/',InsViews.q),
+    url(r'^donate/',InsViews.donate)
 ]

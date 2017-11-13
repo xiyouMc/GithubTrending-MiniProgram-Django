@@ -42,8 +42,10 @@ def Coupon(request):
                     m = md5.new()
                     m.update(recMsg.Content)
                     str_md5 = m.hexdigest()
-                    ins = Ins(md5=str_md5, url=recMsg.Content)
-                    ins.save()
+                    savedIns = Ins.objects.filter(md5=str_md5).exclude()
+                    if len(savedIns) == 0:
+                        ins = Ins(md5=str_md5, url=recMsg.Content)
+                        ins.save()
 
                     replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
                     resultMsg = replyMsg.send()
