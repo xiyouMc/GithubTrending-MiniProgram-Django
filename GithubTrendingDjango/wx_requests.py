@@ -35,8 +35,8 @@ def Coupon(request):
         elif request.method == 'POST':
             recMsg = receive.parse_xml(request.body)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-                toUser = recMsg.ToUserName
-                fromUser = recMsg.FromUserName
+                toUser = recMsg.FromUserName
+                fromUser = recMsg.ToUserName
                 replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
                 resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
