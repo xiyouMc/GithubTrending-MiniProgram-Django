@@ -60,6 +60,7 @@ class ImgText(Msg):
             <item>
                 <Title><![CDATA[{Title}]]></Title> 
                 <PicUrl><![CDATA[{PicUrl}]]></PicUrl>
+                <Description><![CDATA[description]]></Description>
                 <Url><![CDATA[{Url}]]></Url>
             </item>
 
