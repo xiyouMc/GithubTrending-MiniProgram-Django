@@ -36,8 +36,8 @@ def Coupon(request):
             print dir(request.body)
             recMsg = receive.parse_xml(request.body)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-                toUser = recMsg.FromUserName
-                fromUser = recMsg.ToUserName
+                toUser = recMsg.ToUserName
+                fromUser = recMsg.FromUserName
                 if 'instagram.com' in recMsg.Content:
                     # 保存数据库
                     m = md5.new()
