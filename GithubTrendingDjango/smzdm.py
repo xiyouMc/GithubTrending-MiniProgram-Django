@@ -50,7 +50,9 @@ def Coupon(request):
             if msgType == 'text':
                 content = 'test'
                 replyMsg = TextMsg(toUserName,fromUserName,content)
-            return HttpResponse(replyMsg.send())
+            rep = replyMsg.send()
+            print rep
+            return HttpResponse(rep)
     except Exception, Argument:
         a = {"errorcode": '-2'}
         print Argument
