@@ -47,6 +47,7 @@ def Coupon(request):
                     if len(savedIns) == 0:
                         ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
                         ins.save()
+                    
 
                     redisData = _get_redis_task(recMsg.Content + '?__a=1')
                     if redisData is not None:
@@ -66,6 +67,7 @@ def Coupon(request):
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
+                    return HttpResponse(resultMsg)
             else:
                 print "暂且不处理"
                 resultMsg = "success"
