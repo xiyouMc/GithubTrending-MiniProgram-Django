@@ -44,8 +44,17 @@ def Coupon(request):
                     str_md5 = m.hexdigest()
                     savedIns = Ins.objects.filter(md5=str_md5).exclude()
                     if len(savedIns) == 0:
-                        ins = Ins(md5=str_md5, url=recMsg.Content)
+                        ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
                         ins.save()
+                    
+
+                    s = requests.get(url)
+                    js = json.loads(s.text)
+                    avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
+                    avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
+                    avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
+
+                    replyImgMsg = reply.ImgText(toUser,fromUser,avatar_name,avatar_url,'https://python.0x2048.com')
 
                     replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
                     resultMsg = replyMsg.send()
