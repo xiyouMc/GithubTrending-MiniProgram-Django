@@ -33,12 +33,12 @@ def Coupon(request):
                 a = {"errorcode": '-1'}
                 return HttpResponse(a)
         elif request.method == 'POST':
-            print dir(request.body)
             recMsg = receive.parse_xml(request.body)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.ToUserName
                 fromUser = recMsg.FromUserName
                 replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
+                print replyMsg.send()
                 return HttpResponse(replyMsg.send())
 
                 # if 'instagram.com' in recMsg.Content:
