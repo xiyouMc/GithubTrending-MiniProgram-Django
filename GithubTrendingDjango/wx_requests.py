@@ -77,7 +77,7 @@ def Coupon(request):
             else:
                 print "暂且不处理"
                 resultMsg = "success"
-                return HttpResponse(reply.Msg.send())
+                return HttpResponse(resultMsg)
 
             # return HttpResponse(resultMsg)
     except Exception, Argument:
