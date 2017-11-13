@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import requests
 import json
 import hashlib
+import time
 
 
 def Coupon(request):
