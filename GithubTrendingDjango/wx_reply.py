@@ -41,6 +41,7 @@ class ImgText(Msg):
         self.__dict['Title'] = title
         self.__dict['PicUrl'] = picUrl
         self.__dict['Url'] = url
+        self.__dict['description'] = 'hahhahaha'
 
     def send(self):
         #<Description><![CDATA[description1]]></Description>
@@ -60,7 +61,7 @@ class ImgText(Msg):
             <item>
                 <Title><![CDATA[{Title}]]></Title> 
                 <PicUrl><![CDATA[{PicUrl}]]></PicUrl>
-                <Description><![CDATA[description]]></Description>
+                <Description><![CDATA[{description}]]></Description>
                 <Url><![CDATA[{Url}]]></Url>
             </item>
 
