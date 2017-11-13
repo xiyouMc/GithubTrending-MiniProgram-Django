@@ -50,7 +50,7 @@ def Coupon(request):
 
                     redisData = _get_redis_task(recMsg.Content + '?__a=1')
                     if redisData is not None:
-                        resultMsg = userInfo(redisData)
+                        resultMsg = userInfo(redisData,toUser,fromUser)
                     else:
                         _redis_ = _redis.RedisC()
                         r = _redis_._redis_()
@@ -60,7 +60,7 @@ def Coupon(request):
                             redisData = _get_redis_task(
                                 recMsg.Content + '?__a=1')
                             if redisData is not None:
-                                resultMsg = userInfo(redisData)
+                                resultMsg = userInfo(redisData,toUser,fromUser)
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
@@ -75,7 +75,7 @@ def Coupon(request):
         return HttpResponse(json.dumps(a))
 
 
-def userInfo(redisData):
+def userInfo(redisData,toUser,fromUser):
     js = json.loads(redisData)
     avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
         'profile_pic_url')
