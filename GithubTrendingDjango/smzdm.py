@@ -3,6 +3,7 @@ import requests
 import json
 import hashlib
 import time
+import xml.etree.ElementTree as ET
 
 
 def Coupon(request):
@@ -27,11 +28,19 @@ def Coupon(request):
                 return HttpResponse(a)
         elif request.method == 'POST':
             print dir(request.body)
-            body = json.loads(request.body)
-            fromUserName = body.get('FromUserName')
-            createTime = body.get('CreateTime')
-            toUserName = body.get('ToUserName')
-            msgType = body.get('MsgType')
+            xmlData = ET.fromstring(request.body)
+
+
+
+            # body = json.loads(request.body)
+            # fromUserName = body.get('FromUserName')
+            # createTime = body.get('CreateTime')
+            # toUserName = body.get('ToUserName')
+            # msgType = body.get('MsgType')
+            fromUserName = xmlData.find('FromUserName').text
+            createTime = xmlData.find('CreateTime').text
+            toUserName = xmlData.find('ToUserName').text
+            msgType = xmlData.find('MsgType').text
             print fromUserName,fromUserName,msgType
             js = {
                 'fromUserName': 'fromUserName',
