@@ -9,6 +9,7 @@ import wx_recevie as receive
 import wx_reply as reply
 from Instagram.models import Ins
 import md5
+import _redis
 
 
 def Coupon(request):
@@ -47,17 +48,23 @@ def Coupon(request):
                         ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
                         ins.save()
                     
+                    _redis_ = _redis.RedisC()
+                    r = _redis_._redis_()
+                    r.rpush('ins',recMsg.Content + '?__a=1')
+                    redisData = None
+                    while redisData == None:
+                        redisData = r.rpop(str_md5)
+                        if redisData is not None:
+                    # s = requests.get(url,verify=False)
+                            js = json.loads(redisData)
+                            avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
+                            avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
+                            avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
 
-                    s = requests.get(url,verify=False)
-                    js = json.loads(s.text)
-                    avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
-                    avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
-                    avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
+                            replyImgMsg = reply.ImgText(toUser,fromUser,avatar_name,avatar_url,'https://python.0x2048.com')
 
-                    replyImgMsg = reply.ImgText(toUser,fromUser,avatar_name,avatar_url,'https://python.0x2048.com')
-
-                    replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
-                    resultMsg = replyMsg.send()
+                            replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
+                            resultMsg = replyMsg.send()
                 else:
                     print "暂且不处理"
                     resultMsg = "success"

@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 import json
 from models import Ins
 import requests
+from GithubTrendingDjango import _redis
 
 # Create your views here.
 def q(request):
@@ -17,32 +18,39 @@ def q(request):
         print a[0].url
         url = a[0].url
     
-    s = requests.get(url,verify=False)
-    js = json.loads(s.text)
-    avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
-    avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
-    avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
-    edge_sidecar_to_children = js.get('graphql').get('shortcode_media').get('edge_sidecar_to_children')
-    if edge_sidecar_to_children == None:
-        display_resources = js.get('graphql').get('shortcode_media').get('display_resources')
-    imgs = []
-    if edge_sidecar_to_children:
-        edges = edge_sidecar_to_children.get('edges')
-        for edge in edges:
-            node = edge.get('node')
-            display_resources = node.get('display_resources')
-            img = display_resources[len(display_resources) - 1].get('src')
-            imgs.append(img)
-    else:
-        imgs.push(display_resources[len(display_resources)-1].get('src'))
-        
-    # print a.url
-    return render_to_response('ins/index.html', {
-        'avatar_name':avatar_name,
-        'avatar_url': avatar_url,
-        'avatar_href': avatar_href,
-        'imgs': imgs
-    })
+    _redis_ = _redis.RedisC()
+    r = _redis_._redis_()
+    r.rpush('ins',recMsg.Content + '?__a=1')
+    redisData = None
+    while redisData == None:
+        redisData = r.rpop(_md5)
+        if redisData is not None:
+    # s = requests.get(url,verify=False)
+            js = json.loads(redisData)
+            avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
+            avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
+            avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
+            edge_sidecar_to_children = js.get('graphql').get('shortcode_media').get('edge_sidecar_to_children')
+            if edge_sidecar_to_children == None:
+                display_resources = js.get('graphql').get('shortcode_media').get('display_resources')
+            imgs = []
+            if edge_sidecar_to_children:
+                edges = edge_sidecar_to_children.get('edges')
+                for edge in edges:
+                    node = edge.get('node')
+                    display_resources = node.get('display_resources')
+                    img = display_resources[len(display_resources) - 1].get('src')
+                    imgs.append(img)
+            else:
+                imgs.push(display_resources[len(display_resources)-1].get('src'))
+                
+            # print a.url
+            return render_to_response('ins/index.html', {
+                'avatar_name':avatar_name,
+                'avatar_url': avatar_url,
+                'avatar_href': avatar_href,
+                'imgs': imgs
+            })
 
 def donate(request):
     return render_to_response('ins/donate.html',{})
