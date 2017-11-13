@@ -20,37 +20,59 @@ def q(request):
     
     _redis_ = _redis.RedisC()
     r = _redis_._redis_()
-    r.rpush('ins',recMsg.Content + '?__a=1')
-    redisData = None
-    while redisData == None:
-        redisData = r.rpop(_md5)
-        if redisData is not None:
-    # s = requests.get(url,verify=False)
-            js = json.loads(redisData)
-            avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
-            avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
-            avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
-            edge_sidecar_to_children = js.get('graphql').get('shortcode_media').get('edge_sidecar_to_children')
-            if edge_sidecar_to_children == None:
-                display_resources = js.get('graphql').get('shortcode_media').get('display_resources')
-            imgs = []
-            if edge_sidecar_to_children:
-                edges = edge_sidecar_to_children.get('edges')
-                for edge in edges:
-                    node = edge.get('node')
-                    display_resources = node.get('display_resources')
-                    img = display_resources[len(display_resources) - 1].get('src')
-                    imgs.append(img)
-            else:
-                imgs.push(display_resources[len(display_resources)-1].get('src'))
+    print url
+    redisData = _get_redis_task(url)
+    print redisData
+    if redisData is not None:
+        return render(redisData)
+    else:
+        # _write_redis_status('ins',url)
+        r.rpush('ins',url)
+        redisData = None
+        # print  _get_redis_task(url)
+        while redisData == None:
+            redisData = _get_redis_task(url)
+            print redisData
+            if redisData is not None:
+                return render(redisData)
+        # s = requests.get(url,verify=False)
                 
-            # print a.url
-            return render_to_response('ins/index.html', {
-                'avatar_name':avatar_name,
-                'avatar_url': avatar_url,
-                'avatar_href': avatar_href,
-                'imgs': imgs
-            })
+def render(redisData):
+    js = json.loads(redisData)
+    avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
+    avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
+    avatar_name = js.get('graphql').get('shortcode_media').get('owner').get('username')
+    edge_sidecar_to_children = js.get('graphql').get('shortcode_media').get('edge_sidecar_to_children')
+    if edge_sidecar_to_children == None:
+        display_resources = js.get('graphql').get('shortcode_media').get('display_resources')
+    imgs = []
+    if edge_sidecar_to_children:
+        edges = edge_sidecar_to_children.get('edges')
+        for edge in edges:
+            node = edge.get('node')
+            display_resources = node.get('display_resources')
+            img = display_resources[len(display_resources) - 1].get('src')
+            imgs.append(img)
+    else:
+        imgs.push(display_resources[len(display_resources)-1].get('src'))
+        
+    # print a.url
+    return render_to_response('ins/index.html', {
+        'avatar_name':avatar_name,
+        'avatar_url': avatar_url,
+        'avatar_href': avatar_href,
+        'imgs': imgs
+    })
+
+def _get_redis_task(key):
+    _redis_ = _redis.RedisC()
+    r = _redis_._redis_()
+    return r.get(key)
+
+def _write_redis_status(key,content):
+    _redis_ = _redis.RedisC()
+    r = _redis_._redis_()
+    r.set(key,content)
 
 def donate(request):
     return render_to_response('ins/donate.html',{})
