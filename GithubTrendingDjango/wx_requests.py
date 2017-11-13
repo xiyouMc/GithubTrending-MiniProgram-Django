@@ -93,9 +93,9 @@ def userInfo(redisData,toUser,fromUser):
     replyImgMsg = reply.ImgText(toUser, fromUser, avatar_name, avatar_url,
                                 'https://python.0x2048.com')
 
-    result = replyImgMsg.send()
-    print result
-    # replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
+    # result = replyImgMsg.send()
+    # print result
+    replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
     return result
 
 
