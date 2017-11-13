@@ -33,7 +33,7 @@ class TextMsg(Msg):
 
 
 class ImgText(Msg):
-    def __init__(self, toUseName, fromUserName, title, picUrl, url):
+    def __init__(self, toUserName, fromUserName, title, picUrl, url):
         self.__dict__ = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
