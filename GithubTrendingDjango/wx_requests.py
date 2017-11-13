@@ -53,7 +53,8 @@ def Coupon(request):
 
                     redisData = _get_redis_task(recMsg.Content + '?__a=1')
                     if redisData is not None:
-                        resultMsg = userInfo(redisData, toUser, fromUser,str_md5)
+                        resultMsg = userInfo(redisData, toUser, fromUser,
+                                             str_md5)
                         return HttpResponse(resultMsg)
                     else:
                         _redis_ = _redis.RedisC()
@@ -65,7 +66,7 @@ def Coupon(request):
                                 recMsg.Content + '?__a=1')
                             if redisData is not None:
                                 resultMsg = userInfo(redisData, toUser,
-                                                     fromUser,str_md5)
+                                                     fromUser, str_md5)
                                 return HttpResponse(resultMsg)
                             else:
                                 resultMsg = "success"
