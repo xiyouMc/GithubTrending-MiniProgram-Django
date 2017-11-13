@@ -40,33 +40,33 @@ def Coupon(request):
                 fromUser = recMsg.FromUserName
                 if 'instagram.com' in recMsg.Content:
                     # 保存数据库
-                    m = md5.new()
-                    m.update(recMsg.Content)
-                    str_md5 = m.hexdigest()
-                    savedIns = Ins.objects.filter(md5=str_md5).exclude()
-                    if len(savedIns) == 0:
-                        ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
-                        ins.save()
+                    # m = md5.new()
+                    # m.update(recMsg.Content)
+                    # str_md5 = m.hexdigest()
+                    # savedIns = Ins.objects.filter(md5=str_md5).exclude()
+                    # if len(savedIns) == 0:
+                    #     ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
+                    #     ins.save()
                     
 
                     redisData = _get_redis_task(recMsg.Content + '?__a=1')
                     if redisData is not None:
                         resultMsg = userInfo(redisData,toUser,fromUser)
                         return HttpResponse(resultMsg)
-                    else:
-                        _redis_ = _redis.RedisC()
-                        r = _redis_._redis_()
-                        r.rpush('ins', recMsg.Content + '?__a=1')
-                        redisData = None
-                        while redisData == None:
-                            redisData = _get_redis_task(
-                                recMsg.Content + '?__a=1')
-                            if redisData is not None:
-                                resultMsg = userInfo(redisData,toUser,fromUser)
-                                return HttpResponse(resultMsg)
-                            else:
-                                resultMsg = "success"
-                                return HttpResponse(reply.Msg.send())
+                    # else:
+                    #     _redis_ = _redis.RedisC()
+                    #     r = _redis_._redis_()
+                    #     r.rpush('ins', recMsg.Content + '?__a=1')
+                    #     redisData = None
+                    #     while redisData == None:
+                    #         redisData = _get_redis_task(
+                    #             recMsg.Content + '?__a=1')
+                    #         if redisData is not None:
+                    #             resultMsg = userInfo(redisData,toUser,fromUser)
+                    #             return HttpResponse(resultMsg)
+                    #         else:
+                    #             resultMsg = "success"
+                    #             return HttpResponse(reply.Msg.send())
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
