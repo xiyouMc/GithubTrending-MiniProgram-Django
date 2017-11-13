@@ -39,8 +39,8 @@ class ImgText(Msg):
         self.__dict['FromUserName'] = fromUserName
         self.__dict['CreateTime'] = int(time.time())
         self.__dict['Title'] = title
-        self.__dict['PicUrl'] = picUrl
-        self.__dict['Url'] = url
+        self.__dict['PicUrl'] = 'https://www.baidu.com/img/bd_logo1.png'
+        self.__dict['Url'] = 'https://www.baidu.com/'
         self.__dict['description'] = 'hahhahaha'
 
     def send(self):
