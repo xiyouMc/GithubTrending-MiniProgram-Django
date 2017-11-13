@@ -7,6 +7,8 @@ import time
 import xml.etree.ElementTree as ET
 import wx_recevie as receive
 import wx_reply as reply
+from Instagram.models import Ins
+import md5
 
 
 def Coupon(request):
@@ -35,9 +37,19 @@ def Coupon(request):
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                content = "test"
-                replyMsg = reply.TextMsg(toUser, fromUser, content)
-                resultMsg = replyMsg.send()
+                if 'instagram.com' in recMsg.Content:
+                    # 保存数据库
+                    m = md5.new()
+                    m.update(recMsg.Content)
+                    str_md5 = m.hexdigest()
+                    ins = Ins(md5=str_md5, url=recMsg.Content)
+                    ins.save()
+
+                    replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
+                    resultMsg = replyMsg.send()
+                else:
+                    print "暂且不处理"
+                    resultMsg = "success"
             else:
                 print "暂且不处理"
                 resultMsg = "success"
