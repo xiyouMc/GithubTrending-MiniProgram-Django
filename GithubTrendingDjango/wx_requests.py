@@ -64,6 +64,9 @@ def Coupon(request):
                             if redisData is not None:
                                 resultMsg = userInfo(redisData,toUser,fromUser)
                                 return HttpResponse(resultMsg)
+                            else:
+                                resultMsg = "success"
+                                return HttpResponse(reply.Msg.send())
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
