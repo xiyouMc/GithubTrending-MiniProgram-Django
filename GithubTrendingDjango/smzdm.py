@@ -40,6 +40,7 @@ def Coupon(request):
             if msgType == 'text':
                 content = 'test'
                 replyMsg = TextMsg(toUserName,fromUserName,content)
+            print replyMsg.send()
             return HttpResponse(replyMsg.send())
     except Exception, Argument:
         a = {"errorcode": '-2'}
@@ -70,6 +71,7 @@ class TextMsg(Msg):
         <Content><![CDATA[{Content}]]></Content>
         </xml>
         """
+        print XmlForm
         return XmlForm.format(**self.__dict)
 
 # def message(request):
