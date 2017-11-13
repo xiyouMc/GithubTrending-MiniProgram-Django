@@ -96,7 +96,7 @@ def userInfo(redisData,toUser,fromUser):
     # result = replyImgMsg.send()
     # print result
     replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
-    return result
+    return replyMsg.send()
 
 
 def _get_redis_task(key):
