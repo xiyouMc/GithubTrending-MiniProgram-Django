@@ -38,7 +38,10 @@ def Coupon(request):
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.ToUserName
                 fromUser = recMsg.FromUserName
-                if 'instagram.com' in recMsg.Content:
+                replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
+                return HttpResponse(replyMsg.send())
+
+                # if 'instagram.com' in recMsg.Content:
                     # 保存数据库
                     # m = md5.new()
                     # m.update(recMsg.Content)
@@ -49,10 +52,10 @@ def Coupon(request):
                     #     ins.save()
                     
 
-                    redisData = _get_redis_task(recMsg.Content + '?__a=1')
-                    if redisData is not None:
-                        resultMsg = userInfo(redisData,toUser,fromUser)
-                        return HttpResponse(resultMsg)
+                    # redisData = _get_redis_task(recMsg.Content + '?__a=1')
+                    # if redisData is not None:
+                    #     resultMsg = userInfo(redisData,toUser,fromUser)
+                    #     return HttpResponse(resultMsg)
                     # else:
                     #     _redis_ = _redis.RedisC()
                     #     r = _redis_._redis_()
@@ -67,10 +70,10 @@ def Coupon(request):
                     #         else:
                     #             resultMsg = "success"
                     #             return HttpResponse(reply.Msg.send())
-                else:
-                    print "暂且不处理"
-                    resultMsg = "success"
-                    return HttpResponse(reply.Msg.send())
+                # else:
+                #     print "暂且不处理"
+                #     resultMsg = "success"
+                #     return HttpResponse(reply.Msg.send())
             else:
                 print "暂且不处理"
                 resultMsg = "success"
