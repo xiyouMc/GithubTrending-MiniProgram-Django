@@ -34,7 +34,7 @@ class TextMsg(Msg):
 
 class ImgText(Msg):
     def __init__(self, toUserName, fromUserName, title, picUrl, url):
-        self.__dict__ = dict()
+        self.__dict = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
         self.__dict['CreateTime'] = int(time.time())
@@ -66,7 +66,7 @@ class ImgText(Msg):
             </Articles>
             </xml>
         """
-        return XmlForm.format(**self.__dict__)
+        return XmlForm.format(**self.__dict)
 
 
 class ImageMsg(Msg):
