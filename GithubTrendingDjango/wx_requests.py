@@ -76,6 +76,7 @@ def Coupon(request):
 
 
 def userInfo(redisData,toUser,fromUser):
+    print redisData
     js = json.loads(redisData)
     avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
         'profile_pic_url')
@@ -87,8 +88,10 @@ def userInfo(redisData,toUser,fromUser):
     replyImgMsg = reply.ImgText(toUser, fromUser, avatar_name, avatar_url,
                                 'https://python.0x2048.com')
 
+    result = replyImgMsg.send()
+    print result
     # replyMsg = reply.TextMsg(toUser, fromUser, str_md5)
-    return replyImgMsg.send()
+    return result
 
 
 def _get_redis_task(key):
