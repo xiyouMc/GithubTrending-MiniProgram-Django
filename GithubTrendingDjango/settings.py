@@ -28,7 +28,8 @@ GITHUB_LOGIN_DEFAULT = 'https://github.com/login'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'templates/content').replace('\\','/') 
+STATIC_ROOT = os.path.join(
+    os.path.dirname(__file__), '..', 'templates/content').replace('\\', '/')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -54,13 +55,9 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'GithubModel',
+    'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.sessions',
+    'django.contrib.messages', 'django.contrib.staticfiles', 'GithubModel',
     'Instagram'
 ]
 
@@ -105,9 +102,9 @@ DATABASES = {
         'PASSWORD': '211314',
         'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS':{
-            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset':'utf8mb4'
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            
         }
     }
 }
@@ -152,9 +149,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.path.dirname(__file__), 'static').replace('\\','/'),
-)
+    os.path.join(os.path.dirname(__file__), 'static').replace('\\', '/'), )
 
 import django
 django.setup()
-
