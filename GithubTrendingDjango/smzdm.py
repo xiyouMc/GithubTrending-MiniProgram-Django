@@ -30,8 +30,6 @@ def Coupon(request):
             print dir(request.body)
             xmlData = ET.fromstring(request.body)
 
-
-
             # body = json.loads(request.body)
             # fromUserName = body.get('FromUserName')
             # createTime = body.get('CreateTime')
@@ -41,7 +39,8 @@ def Coupon(request):
             createTime = xmlData.find('CreateTime').text
             toUserName = xmlData.find('ToUserName').text
             msgType = xmlData.find('MsgType').text
-            print fromUserName,fromUserName,msgType
+            content = xmlData.find('Content').text.encode("utf-8")
+            print fromUserName, fromUserName, msgType, content, createTime
             js = {
                 'fromUserName': 'fromUserName',
                 'createTime': 'createTime',
@@ -49,7 +48,7 @@ def Coupon(request):
             }
             if msgType == 'text':
                 content = 'test'
-                replyMsg = TextMsg(toUserName,fromUserName,content)
+                replyMsg = TextMsg(toUserName, fromUserName, content)
             rep = replyMsg.send()
             print rep
             return HttpResponse(rep)
@@ -62,8 +61,10 @@ def Coupon(request):
 class Msg(object):
     def __init__(self):
         pass
+
     def send(self):
         return "success"
+
 
 class TextMsg(Msg):
     def __init__(self, toUserName, fromUserName, content):
@@ -85,6 +86,7 @@ class TextMsg(Msg):
         """
         print XmlForm
         return XmlForm.format(**self.__dict)
+
 
 # def message(request):
 #     try:
