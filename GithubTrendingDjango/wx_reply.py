@@ -44,13 +44,18 @@ class ImgText(Msg):
 
     def send(self):
         #<Description><![CDATA[description1]]></Description>
+        #  <item>
+        #         <Title><![CDATA[{Title}]]></Title> 
+        #         <PicUrl><![CDATA[{PicUrl}]]></PicUrl>
+        #         <Url><![CDATA[{Url}]]></Url>
+        #     </item>
         XmlForm = """
             <xml>
             <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
             <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
             <CreateTime>{CreateTime}</CreateTime>
             <MsgType><![CDATA[news]]></MsgType>
-            <ArticleCount>2</ArticleCount>
+            <ArticleCount>1</ArticleCount>
             <Articles>
             <item>
                 <Title><![CDATA[{Title}]]></Title> 
@@ -58,11 +63,7 @@ class ImgText(Msg):
                 <Url><![CDATA[{Url}]]></Url>
             </item>
 
-            <item>
-                <Title><![CDATA[{Title}]]></Title> 
-                <PicUrl><![CDATA[{PicUrl}]]></PicUrl>
-                <Url><![CDATA[{Url}]]></Url>
-            </item>
+           
             </Articles>
             </xml>
         """
