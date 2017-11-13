@@ -17,7 +17,7 @@ def q(request):
         print a[0].url
         url = a[0].url
     
-    s = requests.get(url)
+    s = requests.get(url,verify=False)
     js = json.loads(s.text)
     avatar_url = js.get('graphql').get('shortcode_media').get('owner').get('profile_pic_url')
     avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get('shortcode_media').get('owner').get('username')
