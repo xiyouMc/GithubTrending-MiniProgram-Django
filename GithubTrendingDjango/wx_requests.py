@@ -50,10 +50,10 @@ def Coupon(request):
                     if len(savedIns) == 0:
                         ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
                         ins.save()
-                    
+
                     redisData = _get_redis_task(recMsg.Content + '?__a=1')
                     if redisData is not None:
-                        resultMsg = userInfo(redisData,toUser,fromUser)
+                        resultMsg = userInfo(redisData, toUser, fromUser,str_md5)
                         return HttpResponse(resultMsg)
                     else:
                         _redis_ = _redis.RedisC()
@@ -64,7 +64,8 @@ def Coupon(request):
                             redisData = _get_redis_task(
                                 recMsg.Content + '?__a=1')
                             if redisData is not None:
-                                resultMsg = userInfo(redisData,toUser,fromUser)
+                                resultMsg = userInfo(redisData, toUser,
+                                                     fromUser,str_md5)
                                 return HttpResponse(resultMsg)
                             else:
                                 resultMsg = "success"
@@ -85,7 +86,7 @@ def Coupon(request):
         return HttpResponse(json.dumps(a))
 
 
-def userInfo(redisData,toUser,fromUser):
+def userInfo(redisData, toUser, fromUser, _md5):
     print redisData
     js = json.loads(redisData)
     avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
@@ -96,7 +97,7 @@ def userInfo(redisData,toUser,fromUser):
         'username')
 
     replyImgMsg = reply.ImgText(toUser, fromUser, avatar_name, avatar_url,
-                                'https://python.0x2048.com')
+                                'https://python.0x2048.com/q/?md5Str=' + _md5)
 
     result = replyImgMsg.send()
     # print result

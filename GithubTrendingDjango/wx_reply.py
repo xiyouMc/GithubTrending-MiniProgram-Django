@@ -41,7 +41,7 @@ class ImgText(Msg):
         self.__dict['Title'] = title
         self.__dict['PicUrl'] = picUrl
         self.__dict['Url'] = url
-        self.__dict['description'] = 'hahhahaha'
+        self.__dict['description'] = '这是 ' + title + ' 的 Ins'
 
     def send(self):
         #<Description><![CDATA[description1]]></Description>
