@@ -12,10 +12,11 @@ from GithubTrendingDjango import _redis
 def wallpaper(request):
     print request.GET['md5Str']
     md5Str = request.GET['md5Str']
+    index = request.GET['index']
     # bgc = request.GET['bgc']
     # radius = request.GET['radius']
     # location = request.GET['location']
-    a = WallPaper.objects.filter(md5=md5Str).exclude()
+    a = WallPaper.objects.filter(md5=md5Str, index=index).exclude()
     if len(a) > 0:
         print a[0].base64Str
         base64Str = a[0].base64Str

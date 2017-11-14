@@ -16,5 +16,6 @@ class WallPaper(models.Model):
     # bgc = models.CharField(max_length=10)
     # radius = models.CharField(max_length=10)
     # location = models.CharField(max_length=10)
+    index = models.IntegerField(default=0)
     url = models.CharField(max_length=100)
     base64Str = models.TextField(blank=True, null=True)

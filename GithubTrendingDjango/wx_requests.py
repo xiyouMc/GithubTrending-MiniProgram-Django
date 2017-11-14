@@ -44,7 +44,7 @@ def Coupon(request):
                     url = recMsg.Content[recMsg.Content.find('http'):len(
                         recMsg.Content)]
                     print url
-                    url = url + '?__a=1' + 'base64'
+                    url = url + '?__a=1' + 'base64' + '0'
                     m = md5.new()
                     m.update(url)
                     str_md5 = m.hexdigest()
@@ -53,29 +53,35 @@ def Coupon(request):
                     if base64Data is not None:
                         print 'sss'
                         savedBase64 = WallPaper.objects.filter(
-                            md5=str_md5).exclude()
+                            md5=str_md5, index=0).exclude()
                         #存数据
                         if len(savedBase64) == 0:
                             wallpaper = WallPaper(
                                 md5=str_md5,
                                 url=url,
                                 base64Str=json.loads(base64Data).get(
-                                    'base64Data'))
+                                    'base64Data'),
+                                index=0)
                             wallpaper.save()
                         wallInf = wallInfo(base64Data, toUser, fromUser,
                                            str_md5)
                         return HttpResponse(wallInf)
 
                     else:
-                        _redis_push(
-                            'base64', recMsg.Content[recMsg.Content.find(
-                                'http'):len(recMsg.Content)] + '?__a=1')
+                        js = {
+                            'url':
+                            recMsg.Content[recMsg.Content.find('http'):len(
+                                recMsg.Content)] + '?__a=1',
+                            'index':
+                            0
+                        }
+                        _redis_push('base64', json.dumps(js))
                         while base64Data is None:
                             base64Data = _get_redis_task(url)
                             if base64Data is not None:
                                 #存数据
                                 savedBase64 = WallPaper.objects.filter(
-                                    md5=str_md5).exclude()
+                                    md5=str_md5, index=0).exclude()
                                 if len(savedBase64) == 0:
                                     # base64Obj = json.loads(base64Data)
                                     # for obj in base64Obj:
@@ -96,7 +102,8 @@ def Coupon(request):
                                         md5=str_md5,
                                         url=url,
                                         base64Str=json.loads(base64Data).get(
-                                            'base64Str'))
+                                            'base64Str'),
+                                        index=0)
                                     wallpaper.save()
 
                                 wallInf = wallInfo(base64Data, toUser,
