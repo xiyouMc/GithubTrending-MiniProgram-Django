@@ -34,7 +34,7 @@ def wallpaper(request):
             if base64Data is not None:
                 #存数据
                 savedBase64 = WallPaper.objects.filter(
-                    md5=str_md5, index=index).exclude()
+                    md5=md5Str, index=index).exclude()
                 if len(savedBase64) == 0:
                     wallpaper = WallPaper(
                         md5=md5Str,
