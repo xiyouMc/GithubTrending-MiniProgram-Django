@@ -69,9 +69,9 @@ def Coupon(request):
                                 resultMsg = userInfo(redisData, toUser,
                                                      fromUser, str_md5)
                                 return HttpResponse(resultMsg)
-                            else:
-                                resultMsg = "success"
-                                return HttpResponse(resultMsg)
+                            # else:
+                            #     resultMsg = "success"
+                            #     return HttpResponse(resultMsg)
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
