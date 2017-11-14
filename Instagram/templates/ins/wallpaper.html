@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<Link Rel="SHORTCUT ICON" href="/static/img/favicon.ico">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html" ;>
+<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,  user-scalable=no">
+<title>inskeeper｜Album View</title>
+<style>
+    a {
+        TEXT-DECORATION: none
+    }
+
+    body {
+        margin: 0;
+        padding: 5;
+        max-width: 640px;
+        margin-right: auto;
+        margin-left: auto;
+        color: dimgray;
+        font-family: Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    a {
+        color: gray;
+        font-size: 14px;
+    }
+
+    .left {
+        padding: 0;
+        margin-top: 10px;
+        width: 100%
+    }
+
+    .right {
+        padding: 0;
+        margin: 0px;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .right-box {
+        width: 25%;
+        padding-top: 0;
+        margin-top: 0;
+        height: 36px;
+        line-height: 36px;
+        display: inline-block;
+        text-align: center;
+        background: #e26d6d;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+    .right-title {
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+        margin-top: 10px
+    }
+
+    .Top {
+        max-width: 640px;
+        width: 100%;
+        background-color: dimgray;
+        color: #f9f9f9;
+        margin: 0px;
+        z-index: 100;
+        text-align: center;
+    }
+
+    .ad {
+        border: solid;
+        border-width: 1px;
+        border-color: lightgray;
+        margin: 5px;
+        padding: 5px;
+        width: 93%;
+
+    }
+
+    .content {
+        z-index: 2;
+    }
+
+    .button00 {
+        padding-top: 0;
+        margin-top: 0;
+        width: 36px;
+        height: 22px;
+        line-height: 22px;
+        display: inline-block;
+        text-align: center;
+        background: #888888;
+        color: #fff;
+        border-radius: 3px;
+    }
+
+    .button10 {
+        padding-top: 0;
+        margin-top: 0;
+        width: 36px;
+        height: 22px;
+        line-height: 22px;
+        display: inline-block;
+        text-align: center;
+        background: #888888;
+        color: #fff;
+        border-radius: 3px;
+    }
+
+    .button20 {
+        padding-top: 0;
+        margin-top: 0;
+        width: 36px;
+        height: 22px;
+        line-height: 22px;
+        display: inline-block;
+        text-align: center;
+        background: #888888;
+        color: #fff;
+        border-radius: 3px;
+    }
+</style>
+<script type="text/javascript"> 
+
+</script>
+</head>
+
+<body>
+    <div class="Top">
+        <p>关注
+            <a href="http://weibo.com/inskeeper" style="color:red;font-size: 16px;padding: 5px">@inskeeper 微博 </a>，获取更多壁纸
+            <span style="float:right">
+                <a href="http://inskeeper.cn/upload" style="color:white;font-size: 16px">上传&nbsp;&nbsp;</a>
+            </span>
+        </p>
+    </div>
+
+    <div ontouchstart="" class="content" style="margin-top: 10px;display: flex;flex-direction: row;justify-content: space-between;">
+        <div style="font-size: 14px; display: flex;flex-direction: column;align-items: center;margin-left: 10px;">
+            <a href="/expandview?picurl=static/ins_media/3159105669667.jpg">
+                <img src="/static/img/expand.png" width="50px">
+                <p>Expand</p>
+            </a>
+        </div>
+
+
+
+        <br>
+
+        <img src="{{ base64Str }}" alt='' class="content" style="width: 80%;height:80%;border:0;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);"
+        />
+
+        <br>
+
+    </div>
+    <div class="edit_area" style="line-height: 160%">
+        背景：
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=40&location=down" class='button00'>模 糊</a> &nbsp;&nbsp;
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=white&radius=40&location=down"
+            class='button01'>白 色</a> &nbsp;&nbsp;
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=black&radius=40&location=down"
+            class='button02'>黑 色</a>
+        <br> 模糊：
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=40&location=down" class='button10'>适 中</a> &nbsp;&nbsp;
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=10&location=down"
+            class='button11'>较 弱</a> &nbsp;&nbsp;
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=80&location=down"
+            class='button12'>较 强</a>
+        <br> 位置：
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=40&location=down" class='button20'>下 方</a> &nbsp;&nbsp;
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=40&location=mid"
+            class='button21'>中 间</a> &nbsp;&nbsp;
+        <a href="/mkwallpaper?picurl=static/ins_media/3159105669667.jpg&bgc=None&radius=40&location=top"
+            class='button22'>上 方</a>
+        <br>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <div class="right">
+
+        <div class='right-box' />
+        <a href="https://inskeeper.cn/donate" style="color: white;">打 赏</a>
+    </div>
+    <p style="font-size:0.8em;text-align:center;margin-left:5px;padding: 5px;line-height: 100% ">「inskeeper」为个人维护项目，谢谢您的支持 ^_^</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <p style="font-size:12px;text-align: center; ">
+        <a href="/help" style="color:dimgray">更多教程 </a> ｜
+        <a href="http://mp.weixin.qq.com/s?__biz=MzIwNTI1MDIyMA==&mid=503660133&idx=1&sn=7f1d453466ebbe9e78e2ed5ffd3f22f4&scene=19#wechat_redirect"
+            style="color:dimgray">使用条款</a> ｜
+        <a href="http://mp.weixin.qq.com/s?__biz=MzIwNTI1MDIyMA==&mid=2651145323&idx=1&sn=b450936374ef5edcc076bccfadf8705f&chksm=8cc22fa8bbb5a6bedf04bcc3bc7003449d44e026451f10279294046fa5b74cb90600e6bdf2a5#rd"
+            style="color:dimgray">关于我们</a> ｜
+        <a href="http://mp.weixin.qq.com/s?__biz=MzIwNTI1MDIyMA==&mid=503658455&idx=1&sn=818590a59cb3868774a830ca29e87063#rd"
+            style="color:dimgray">联系我们</a>
+    </p>
+
+</body>
+
+</html>

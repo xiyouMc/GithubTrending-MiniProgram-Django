@@ -7,7 +7,7 @@ import time
 import xml.etree.ElementTree as ET
 import wx_recevie as receive
 import wx_reply as reply
-from Instagram.models import Ins
+from Instagram.models import Ins, WallPaper
 import md5
 import _redis
 
@@ -40,8 +40,50 @@ def Coupon(request):
                 # replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
+                if '壁纸' in recMsg.Content:
+                    url = recMsg.Content.replace('壁纸', '')
+                    url = url + '?__a=1' + 'base64'
+                    m = md5.new()
+                    m.update(url)
+                    str_md5 = m.hexdigest()
 
-                if 'instagram.com' in recMsg.Content:
+                    base64Data = _get_redis_task(url)
+                    if base64Data is not None:
+                        print 'sss'
+                        savedBase64 = WallPaper.objects.filter(
+                            md5=str_md5).exclude()
+                        #存数据
+                        if len(savedBase64) == 0:
+                            wallpaper = WallPaper(
+                                md5=str_md5,
+                                url=url,
+                                base64Str=JSON.loads(base64Data).get(
+                                    'base64Data'))
+                            wallpaper.save()
+                        wallInf = wallInfo(base64Data, toUser, fromUser,
+                                           str_md5)
+                        return HttpResponse(wallInf)
+
+                    else:
+                        _redis_push('base64', recMsg.Content.replace('壁纸', ''))
+                        while base64Data is None:
+                            base64Data = _get_redis_task(url)
+                            if base64Data is not None:
+                                #存数据
+                                savedBase64 = WallPaper.objects.filter(
+                                    md5=str_md5).exclude()
+                                if len(savedBase64) == 0:
+                                    wallpaper = WallPaper(
+                                        md5=str_md5,
+                                        url=url,
+                                        base64Str=JSON.loads(base64Data).get(
+                                            'base64Str'))
+                                    wallpaper.save()
+                                wallInf = wallInfo(base64Data, toUser,
+                                                   fromUser, str_md5)
+                                return HttpResponse(wallInf)
+
+                elif 'instagram.com' in recMsg.Content:
                     # 保存数据库
                     m = md5.new()
                     m.update(recMsg.Content)
@@ -72,6 +114,7 @@ def Coupon(request):
                             # else:
                             #     resultMsg = "success"
                             #     return HttpResponse(resultMsg)
+
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
@@ -86,6 +129,18 @@ def Coupon(request):
         a = {"errorcode": '-2'}
         print Argument
         return HttpResponse(json.dumps(a))
+
+
+def wallInfo(base64Data, toUser, fromUser, _md5):
+    picUrl = JSON.loads(base64Data).get('picUrl')
+    replyImgMsg = reply.ImgText(
+        toUser, fromUser, avatar_name, picUrl,
+        'https://python.0x2048.com/wallpaper/?md5Str=' + _md5)
+
+    result = replyImgMsg.send()
+    # print result
+    # replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
+    return result
 
 
 def userInfo(redisData, toUser, fromUser, _md5):
@@ -111,3 +166,9 @@ def _get_redis_task(key):
     _redis_ = _redis.RedisC()
     r = _redis_._redis_()
     return r.get(key)
+
+
+def _redis_push(key, values):
+    _redis_ = _redis.RedisC()
+    r = _redis_._redis_()
+    return r.rpush(key, values)

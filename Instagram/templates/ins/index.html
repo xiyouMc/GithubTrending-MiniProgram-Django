@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html" ;>
 <meta name="viewport" content="width=device-width">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,  user-scalable=no">
-<title>inspy｜微信公众号</title>
+<title>insloader｜微信公众号</title>
 <style>
     body {
         margin: 0;
@@ -162,7 +162,7 @@
 
         <div class="header">
             <div class="owner">
-                <img class="avatar" src='{{ avatar_url }}'/>
+                <img class="avatar" src='{{ avatar_url }}' />
                 <a href='{{ avatar_href }}'> {{ avatar_name }}</a>
             </div>
         </div>
@@ -170,18 +170,14 @@
         <!-- <img src="https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e35/23421617_142472872985094_8010543881726722048_n.jpg" alt='VPN需连接！图片未成功加载，回复 强制模式'
             class="content" /> -->
         <br>
+        <br> {% for img in imgs %}
+        <img src='{{ img }}' alt='VPN需连接！图片未成功加载，回复 强制模式' class="content" />
         <br>
-
-        {% for img in imgs %}
-        <img src='{{ img }}' alt='VPN需连接！图片未成功加载，回复 强制模式'
-            class="content" />
-        <br>
-        <br>
-        {% endfor %}
+        <br> {% endfor %}
 
 
         <p class="date">
-            <a href="https://instagram.com/p/BbbPnrCFjuf/" target="_blank" style="color:dimgray;">2017/11/13 14:39</a>
+            <a href="{{ create_href}}" target="_blank" style="color:dimgray;">{{create_time}}</a>
         </p>
 
         <p id="caption">△ 🌈happy weekend</p>
