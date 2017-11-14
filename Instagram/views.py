@@ -120,7 +120,8 @@ def render(redisData, _md5):
         'avatar_url': avatar_url,
         'avatar_href': avatar_href,
         'imgs': imgs,
-        'md5':_md5
+        'md5':_md5,
+        'nums':range(len(imgs))
     })
 
 
