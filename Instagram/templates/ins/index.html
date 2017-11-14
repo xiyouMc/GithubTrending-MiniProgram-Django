@@ -169,9 +169,10 @@
 
         <!-- <img src="https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e35/23421617_142472872985094_8010543881726722048_n.jpg" alt='VPN需连接！图片未成功加载，回复 强制模式'
             class="content" /> -->
+            <!-- data:image/jpg;base64,  -->
         <br>
         <br> {% for img in imgs %}
-        <img src='data:image/jpg;base64, {{ img }}' alt='VPN需连接！图片未成功加载，回复 强制模式' class="content" />
+        <img src='{{ img }}' alt='VPN需连接！图片未成功加载，回复 强制模式' class="content" />
         <br>
         <br> {% endfor %}
 
