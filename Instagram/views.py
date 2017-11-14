@@ -57,28 +57,31 @@ def q(request):
 
 def render(redisData):
     js = json.loads(redisData)
-    avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
-        'profile_pic_url')
-    avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get(
-        'shortcode_media').get('owner').get('username')
-    avatar_name = js.get('graphql').get('shortcode_media').get('owner').get(
-        'username')
-    edge_sidecar_to_children = js.get('graphql').get('shortcode_media').get(
-        'edge_sidecar_to_children')
-    if edge_sidecar_to_children == None:
-        display_resources = js.get('graphql').get('shortcode_media').get(
-            'display_resources')
-    imgs = []
-    if edge_sidecar_to_children:
-        edges = edge_sidecar_to_children.get('edges')
-        for edge in edges:
-            node = edge.get('node')
-            display_resources = node.get('display_resources')
-            img = display_resources[len(display_resources) - 1].get('src')
-            imgs.append(img)
-    else:
-        imgs.append(display_resources[len(display_resources) - 1].get('src'))
-
+    # avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
+    #     'profile_pic_url')
+    # avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get(
+    #     'shortcode_media').get('owner').get('username')
+    # avatar_name = js.get('graphql').get('shortcode_media').get('owner').get(
+    #     'username')
+    # edge_sidecar_to_children = js.get('graphql').get('shortcode_media').get(
+    #     'edge_sidecar_to_children')
+    # if edge_sidecar_to_children == None:
+    #     display_resources = js.get('graphql').get('shortcode_media').get(
+    #         'display_resources')
+    # imgs = []
+    # if edge_sidecar_to_children:
+    #     edges = edge_sidecar_to_children.get('edges')
+    #     for edge in edges:
+    #         node = edge.get('node')
+    #         display_resources = node.get('display_resources')
+    #         img = display_resources[len(display_resources) - 1].get('src')
+    #         imgs.append(img)
+    # else:
+    #     imgs.append(display_resources[len(display_resources) - 1].get('src'))
+    avatar_name = js.get('avatar_name')
+    avatar_url = js.get('avatar_url')
+    avatar_href = js.get('avatar_href')
+    imgs = js.get('imgsBase64')
     # print a.url
     return render_to_response('ins/index.html', {
         'avatar_name': avatar_name,

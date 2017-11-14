@@ -171,7 +171,7 @@
             class="content" /> -->
         <br>
         <br> {% for img in imgs %}
-        <img src='{{ img }}' alt='VPN需连接！图片未成功加载，回复 强制模式' class="content" />
+        <img src='data:image/jpg;base64, {{ img }}' alt='VPN需连接！图片未成功加载，回复 强制模式' class="content" />
         <br>
         <br> {% endfor %}
 
