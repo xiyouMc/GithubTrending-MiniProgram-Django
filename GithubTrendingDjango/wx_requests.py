@@ -64,6 +64,7 @@ def Coupon(request):
                         while redisData == None:
                             redisData = _get_redis_task(
                                 recMsg.Content + '?__a=1')
+                            print redisData
                             if redisData is not None:
                                 resultMsg = userInfo(redisData, toUser,
                                                      fromUser, str_md5)
