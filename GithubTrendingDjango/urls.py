@@ -40,7 +40,8 @@ urlpatterns = [
     url(r'v1/unstar', github_unstar.GithubUnStar),
     url(r'v1/index.html', Github_views.index),
     url(r'v1/image/', image.Image),
-    url(r'wx/',wx_requests.Coupon),
-    url(r'^q/',InsViews.q),
-    url(r'^donate/',InsViews.donate)
+    url(r'wx/', wx_requests.Coupon),
+    url(r'^q/', InsViews.q),
+    url(r'^donate/', InsViews.donate),
+    url(r'^wallpaper/', InsViews.wallpaper)
 ]
