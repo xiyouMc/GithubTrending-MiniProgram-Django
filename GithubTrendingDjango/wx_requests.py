@@ -41,7 +41,7 @@ def Coupon(request):
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
                 if '壁纸' in recMsg.Content:
-                    url = recMsg.Content[2:len(recMsg.Content)]
+                    url = recMsg.Content[len('壁纸'):len(recMsg.Content)]
                     print url
                     url = url + '?__a=1' + 'base64'
                     m = md5.new()
