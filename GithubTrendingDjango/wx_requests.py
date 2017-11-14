@@ -161,7 +161,7 @@ def wallInfo(base64Data, toUser, fromUser, _md5):
     picUrl = json.loads(base64Data).get('picUrl')
     replyImgMsg = reply.ImgText(
         toUser, fromUser, 'WallPaper', picUrl,
-        'https://python.0x2048.com/wallpaper/?md5Str=' + _md5)
+        'https://python.0x2048.com/wallpaper/?md5Str=' + _md5 + "&index=0")
 
     result = replyImgMsg.send()
     # print result
