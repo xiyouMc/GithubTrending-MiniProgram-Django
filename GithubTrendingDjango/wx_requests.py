@@ -60,7 +60,7 @@ def Coupon(request):
                                 md5=str_md5,
                                 url=url,
                                 base64Str=json.loads(base64Data).get(
-                                    'base64Data'),
+                                    'base64Str'),
                                 index=0)
                             wallpaper.save()
                         wallInf = wallInfo(base64Data, toUser, fromUser,
