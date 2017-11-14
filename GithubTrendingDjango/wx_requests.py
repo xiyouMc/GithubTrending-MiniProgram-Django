@@ -164,12 +164,9 @@ def wallInfo(base64Data, toUser, fromUser, _md5):
 
 def userInfo(redisData, toUser, fromUser, _md5):
     js = json.loads(redisData)
-    avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
-        'profile_pic_url')
-    avatar_href = 'https://www.instagram.com/%s/' % js.get('graphql').get(
-        'shortcode_media').get('owner').get('username')
-    avatar_name = js.get('graphql').get('shortcode_media').get('owner').get(
-        'username')
+    avatar_url = js.get('avatar_url')
+    avatar_href = js.get('avatar_href')
+    avatar_name = js.get('avatar_name')
 
     replyImgMsg = reply.ImgText(toUser, fromUser, avatar_name, avatar_url,
                                 'https://python.0x2048.com/q/?md5Str=' + _md5)
