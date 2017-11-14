@@ -66,7 +66,7 @@ def q(request):
     redisData = _get_redis_task(url)
     print redisData
     if redisData is not None:
-        return render(redisData)
+        return render(redisData,_md5)
     else:
         # _write_redis_status('ins',url)
         r.rpush('ins', url)
