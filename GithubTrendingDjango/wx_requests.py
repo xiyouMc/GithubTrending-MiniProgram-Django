@@ -41,7 +41,7 @@ def Coupon(request):
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
                 if '壁纸' in recMsg.Content:
-                    url = recMsg.Content[len('壁纸'):len(recMsg.Content)]
+                    url = recMsg.Content[recMsg.Content.find('http'):len(recMsg.Content)]
                     print url
                     url = url + '?__a=1' + 'base64'
                     m = md5.new()
@@ -66,7 +66,7 @@ def Coupon(request):
                         return HttpResponse(wallInf)
 
                     else:
-                        _redis_push('base64', recMsg.Content[len('壁纸'):len(recMsg.Content)] + '?__a=1')
+                        _redis_push('base64', recMsg.Content[recMsg.Content.find('http'):len(recMsg.Content)] + '?__a=1')
                         while base64Data is None:
                             base64Data = _get_redis_task(url)
                             if base64Data is not None:
