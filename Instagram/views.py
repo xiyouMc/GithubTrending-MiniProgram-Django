@@ -66,7 +66,7 @@ def q(request):
     redisData = _get_redis_task(url)
     print redisData
     if redisData is not None:
-        return render(redisData,_md5)
+        return render(redisData, _md5, url)
     else:
         # _write_redis_status('ins',url)
         r.rpush('ins', url)
@@ -76,11 +76,11 @@ def q(request):
             redisData = _get_redis_task(url)
             print redisData
             if redisData is not None:
-                return render(redisData, _md5)
+                return render(redisData, _md5, url)
         # s = requests.get(url,verify=False)
 
 
-def render(redisData, _md5):
+def render(redisData, _md5, url):
     js = json.loads(redisData)
     # avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
     #     'profile_pic_url')
@@ -120,8 +120,9 @@ def render(redisData, _md5):
         'avatar_url': avatar_url,
         'avatar_href': avatar_href,
         'imgs': imgs,
-        'md5':_md5,
-        'nums':range(len(imgs))
+        'md5': _md5,
+        'url': url,
+        'nums': range(len(imgs))
     })
 
 
