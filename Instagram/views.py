@@ -48,7 +48,10 @@ def wallpaper(request):
                     md5Str
                 })
 
-
+def _redis_push(key, values):
+    _redis_ = _redis.RedisC()
+    r = _redis_._redis_()
+    return r.rpush(key, values)
 # Create your views here.
 def q(request):
     # print request.get('md5Str')
