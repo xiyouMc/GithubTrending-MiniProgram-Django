@@ -25,11 +25,12 @@ def wallpaper(request):
                                    'md5Str': md5Str})
     else:
         url = request.GET['url']
-
+        key = url + 'base64' + str(index)
         js = {'url': url, 'index': index}
         _redis_push('base64', json.dumps(js))
+        base64Data = _get_redis_task(key)
         while base64Data is None:
-            base64Data = _get_redis_task(url)
+            base64Data = _get_redis_task(key)
             if base64Data is not None:
                 #存数据
                 savedBase64 = WallPaper.objects.filter(
