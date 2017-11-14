@@ -41,7 +41,8 @@ def Coupon(request):
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
                 if '壁纸' in recMsg.Content:
-                    url = recMsg.Content[recMsg.Content.find('http'):len(recMsg.Content)]
+                    url = recMsg.Content[recMsg.Content.find('http'):len(
+                        recMsg.Content)]
                     print url
                     url = url + '?__a=1' + 'base64'
                     m = md5.new()
@@ -66,7 +67,9 @@ def Coupon(request):
                         return HttpResponse(wallInf)
 
                     else:
-                        _redis_push('base64', recMsg.Content[recMsg.Content.find('http'):len(recMsg.Content)] + '?__a=1')
+                        _redis_push(
+                            'base64', recMsg.Content[recMsg.Content.find(
+                                'http'):len(recMsg.Content)] + '?__a=1')
                         while base64Data is None:
                             base64Data = _get_redis_task(url)
                             if base64Data is not None:
@@ -74,12 +77,28 @@ def Coupon(request):
                                 savedBase64 = WallPaper.objects.filter(
                                     md5=str_md5).exclude()
                                 if len(savedBase64) == 0:
+                                    # base64Obj = json.loads(base64Data)
+                                    # for obj in base64Obj:
+                                    #     bgc = obj.get('bgc')
+                                    #     base64Str = obj.get('base64')
+                                    #     radius = obj.get('radius')
+                                    #     location = obj.get('location')
+                                    #     url = obj.get('url')
+                                    #     wallpaper = WallPaper(
+                                    #         md5=str_md5,
+                                    #         url=url,
+                                    #         bgc=bgc,
+                                    #         radius=radius,
+                                    #         base64Str=base64Str,
+                                    #         location=location)
+                                    #     wallpaper.save()
                                     wallpaper = WallPaper(
                                         md5=str_md5,
                                         url=url,
                                         base64Str=json.loads(base64Data).get(
                                             'base64Str'))
                                     wallpaper.save()
+
                                 wallInf = wallInfo(base64Data, toUser,
                                                    fromUser, str_md5)
                                 return HttpResponse(wallInf)

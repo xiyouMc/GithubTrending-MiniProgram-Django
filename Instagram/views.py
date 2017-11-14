@@ -12,21 +12,24 @@ from GithubTrendingDjango import _redis
 def wallpaper(request):
     print request.GET['md5Str']
     md5Str = request.GET['md5Str']
+    bgc = request.GET['bgc']
+    radius = request.GET['radius']
+    location = request.GET['location']
     a = WallPaper.objects.filter(md5=md5Str).exclude()
     if len(a) > 0:
         print a[0].base64Str
         base64Str = a[0].base64Str
-        return render_to_response('ins/wallpaper.html',{
-'base64Str':base64Str,
-})
-    
-   
+        return render_to_response('ins/wallpaper.html',
+                                  {'base64Str': base64Str,
+                                   'md5Str': md5Str})
+
 
 # Create your views here.
 def q(request):
     # print request.get('md5Str')
     print request.GET['md5Str']
     _md5 = request.GET['md5Str']
+
     a = Ins.objects.filter(md5=_md5).exclude()
     if len(a) > 0:
         print a[0].url

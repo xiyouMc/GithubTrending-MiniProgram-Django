@@ -13,5 +13,8 @@ class Ins(models.Model):
 
 class WallPaper(models.Model):
     md5 = models.CharField(max_length=100)
+    # bgc = models.CharField(max_length=10)
+    # radius = models.CharField(max_length=10)
+    # location = models.CharField(max_length=10)
     url = models.CharField(max_length=100)
     base64Str = models.TextField(blank=True, null=True)
