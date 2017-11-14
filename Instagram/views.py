@@ -18,11 +18,12 @@ def wallpaper(request):
     # location = request.GET['location']
     a = WallPaper.objects.filter(md5=md5Str, index=index).exclude()
     if len(a) > 0:
-        print a[0].base64Str
+        # print a[0].base64Str
         base64Str = a[0].base64Str
         return render_to_response('ins/wallpaper.html',
                                   {'base64Str': base64Str,
                                    'md5Str': md5Str})
+    
 
 
 # Create your views here.
