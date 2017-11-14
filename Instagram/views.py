@@ -23,7 +23,30 @@ def wallpaper(request):
         return render_to_response('ins/wallpaper.html',
                                   {'base64Str': base64Str,
                                    'md5Str': md5Str})
-    
+    else:
+        url = request.GET['url']
+
+        js = {'url': url, 'index': index}
+        _redis_push('base64', json.dumps(js))
+        while base64Data is None:
+            base64Data = _get_redis_task(url)
+            if base64Data is not None:
+                #存数据
+                savedBase64 = WallPaper.objects.filter(
+                    md5=str_md5, index=index).exclude()
+                if len(savedBase64) == 0:
+                    wallpaper = WallPaper(
+                        md5=md5Str,
+                        url=url,
+                        base64Str=json.loads(base64Data).get('base64Str'),
+                        index=index)
+                    wallpaper.save()
+                return render_to_response('ins/wallpaper.html', {
+                    'base64Str':
+                    json.loads(base64Data).get('base64Str'),
+                    'md5Str':
+                    md5Str
+                })
 
 
 # Create your views here.
@@ -53,11 +76,11 @@ def q(request):
             redisData = _get_redis_task(url)
             print redisData
             if redisData is not None:
-                return render(redisData)
+                return render(redisData, _md5)
         # s = requests.get(url,verify=False)
 
 
-def render(redisData):
+def render(redisData, _md5):
     js = json.loads(redisData)
     # avatar_url = js.get('graphql').get('shortcode_media').get('owner').get(
     #     'profile_pic_url')
@@ -84,12 +107,20 @@ def render(redisData):
     avatar_url = js.get('avatar_url')
     avatar_href = js.get('avatar_href')
     imgs = js.get('imgsBase64')
+    index = 0
+    jump_urls = []
+    for img in imgs:
+        jump_urls.append('https://python.0x2048.com/wallpaper/?md5Str=' + _md5
+                         + "&index=" + str(index))
+        index = index + 1
+
     # print a.url
     return render_to_response('ins/index.html', {
         'avatar_name': avatar_name,
         'avatar_url': avatar_url,
         'avatar_href': avatar_href,
-        'imgs': imgs
+        'imgs': imgs,
+        'jump_urls': jump_urls
     })
 
 

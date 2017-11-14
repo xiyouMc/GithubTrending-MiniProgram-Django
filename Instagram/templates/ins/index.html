@@ -169,11 +169,16 @@
 
         <!-- <img src="https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e35/23421617_142472872985094_8010543881726722048_n.jpg" alt='VPN需连接！图片未成功加载，回复 强制模式'
             class="content" /> -->
-            <!-- data:image/jpg;base64,  -->
+        <!-- data:image/jpg;base64,  -->
         <br>
-        <br> {% for img in imgs %}
-        <img src='{{ img }}' alt='VPN需连接！' class="content"  onerror=''/>
-        
+        <br> 
+        {% index = 0%}
+        {% for img in imgs %}
+        {% index = index + 1 %}
+        <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='' />
+        <p class="date">
+            <a href="{{ jump_urls[index] }}" target="_blank" style="color:dimgray;">转换为壁纸</a>
+        </p>
         <br>
         <br> {% endfor %}
 
