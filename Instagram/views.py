@@ -54,7 +54,7 @@ def render(redisData):
             img = display_resources[len(display_resources) - 1].get('src')
             imgs.append(img)
     else:
-        imgs.push(display_resources[len(display_resources)-1].get('src'))
+        imgs.append(display_resources[len(display_resources)-1].get('src'))
         
     # print a.url
     return render_to_response('ins/index.html', {
