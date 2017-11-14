@@ -57,7 +57,7 @@ def Coupon(request):
                             wallpaper = WallPaper(
                                 md5=str_md5,
                                 url=url,
-                                base64Str=JSON.loads(base64Data).get(
+                                base64Str=json.loads(base64Data).get(
                                     'base64Data'))
                             wallpaper.save()
                         wallInf = wallInfo(base64Data, toUser, fromUser,
@@ -76,7 +76,7 @@ def Coupon(request):
                                     wallpaper = WallPaper(
                                         md5=str_md5,
                                         url=url,
-                                        base64Str=JSON.loads(base64Data).get(
+                                        base64Str=json.loads(base64Data).get(
                                             'base64Str'))
                                     wallpaper.save()
                                 wallInf = wallInfo(base64Data, toUser,
@@ -132,7 +132,7 @@ def Coupon(request):
 
 
 def wallInfo(base64Data, toUser, fromUser, _md5):
-    picUrl = JSON.loads(base64Data).get('picUrl')
+    picUrl = json.loads(base64Data).get('picUrl')
     replyImgMsg = reply.ImgText(
         toUser, fromUser, avatar_name, picUrl,
         'https://python.0x2048.com/wallpaper/?md5Str=' + _md5)
