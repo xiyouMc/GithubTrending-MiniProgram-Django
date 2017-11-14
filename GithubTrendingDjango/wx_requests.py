@@ -71,11 +71,11 @@ def Coupon(request):
                                 return HttpResponse(resultMsg)
                             else:
                                 resultMsg = "success"
-                                return HttpResponse(reply.Msg.send())
+                                return HttpResponse(resultMsg)
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
-                    return HttpResponse(reply.Msg.send())
+                    return HttpResponse(resultMsg)
             else:
                 print "暂且不处理"
                 resultMsg = "success"
