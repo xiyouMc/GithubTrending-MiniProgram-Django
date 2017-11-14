@@ -172,15 +172,17 @@
         <!-- data:image/jpg;base64,  -->
         <br>
         <br> 
-        {% index = 0%}
+        {% index = 0 %}
         {% for img in imgs %}
-        {% index = index + 1 %}
+       
         <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='' />
         <p class="date">
             <a href="{{ jump_urls[index] }}" target="_blank" style="color:dimgray;">转换为壁纸</a>
         </p>
         <br>
-        <br> {% endfor %}
+        <br> 
+        {% index = index + 1 %}
+        {% endfor %}
 
 
         <p class="date">
