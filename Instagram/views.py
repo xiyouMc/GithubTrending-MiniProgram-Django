@@ -28,31 +28,60 @@ def wallpaper(request):
         key = url + 'base64' + str(index)
         js = {'url': url, 'index': index}
         _redis_push('base64', json.dumps(js))
+        print key
         base64Data = _get_redis_task(key)
-        while base64Data is None:
-            base64Data = _get_redis_task(key)
-            if base64Data is not None:
-                #存数据
-                savedBase64 = WallPaper.objects.filter(
-                    md5=md5Str, index=index).exclude()
-                if len(savedBase64) == 0:
-                    wallpaper = WallPaper(
-                        md5=md5Str,
-                        url=url,
-                        base64Str=json.loads(base64Data).get('base64Str'),
-                        index=index)
-                    wallpaper.save()
-                return render_to_response('ins/wallpaper.html', {
-                    'base64Str':
-                    json.loads(base64Data).get('base64Str'),
-                    'md5Str':
-                    md5Str
-                })
+        print base64Data
+        if base64Data is not None:
+            #存数据
+            savedBase64 = WallPaper.objects.filter(
+                md5=md5Str, index=index).exclude()
+            if len(savedBase64) == 0:
+                wallpaper = WallPaper(
+                    md5=md5Str,
+                    url=url,
+                    base64Str=json.loads(base64Data).get('base64Str'),
+                    index=index)
+                wallpaper.save()
+            print 'base64Data'
+            print base64Data
+            print md5Str
+            return render_to_response('ins/wallpaper.html', {
+                'base64Str':
+                json.loads(base64Data).get('base64Str'),
+                'md5Str':
+                md5Str
+            })
+        else:
+            while base64Data is None:
+                base64Data = _get_redis_task(key)
+                if base64Data is not None:
+                    #存数据
+                    savedBase64 = WallPaper.objects.filter(
+                        md5=md5Str, index=index).exclude()
+                    if len(savedBase64) == 0:
+                        wallpaper = WallPaper(
+                            md5=md5Str,
+                            url=url,
+                            base64Str=json.loads(base64Data).get('base64Str'),
+                            index=index)
+                        wallpaper.save()
+                    print 'base64Data'
+                    print base64Data
+                    print md5Str
+                    return render_to_response('ins/wallpaper.html', {
+                        'base64Str':
+                        json.loads(base64Data).get('base64Str'),
+                        'md5Str':
+                        md5Str
+                    })
+
 
 def _redis_push(key, values):
     _redis_ = _redis.RedisC()
     r = _redis_._redis_()
     return r.rpush(key, values)
+
+
 # Create your views here.
 def q(request):
     # print request.get('md5Str')
