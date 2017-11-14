@@ -66,7 +66,7 @@ def Coupon(request):
                         return HttpResponse(wallInf)
 
                     else:
-                        _redis_push('base64', recMsg.Content.replace('壁纸', ''))
+                        _redis_push('base64', recMsg.Content[len('壁纸'):len(recMsg.Content)] + '?__a=1')
                         while base64Data is None:
                             base64Data = _get_redis_task(url)
                             if base64Data is not None:
