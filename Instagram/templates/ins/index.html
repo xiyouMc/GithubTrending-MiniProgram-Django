@@ -172,16 +172,19 @@
         <!-- data:image/jpg;base64,  -->
         <br>
         <br> 
-        {% for index,img in enumerate(imgs) %}
-        {% jump=jump_urls[index] %}
+        {% for img in imgs %}
+       
         <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='' />
-        <p class="date">
-            <a href="{{ jump }}" target="_blank" style="color:dimgray;">转换为壁纸</a>
-        </p>
+        
         <br>
         <br> 
         {% endfor %}
 
+        {% for index in range(len(imgs)) %}
+        <p class="date">
+            <a href="https://python.0x2048.com/wallpaper/?md5Str={{_md5 }}&index={{ index }}" target="_blank" style="color:dimgray;">转换为壁纸{{ index }}</a>
+        </p>
+        {% endfor %}
 
         <p class="date">
             <a href="{{ create_href}}" target="_blank" style="color:dimgray;">{{create_time}}</a>

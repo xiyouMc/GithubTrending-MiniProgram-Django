@@ -109,10 +109,10 @@ def render(redisData, _md5):
     imgs = js.get('imgsBase64')
     index = 0
     jump_urls = []
-    for img in imgs:
-        jump_urls.append('https://python.0x2048.com/wallpaper/?md5Str=' + _md5
-                         + "&index=" + str(index))
-        index = index + 1
+    # for img in imgs:
+    #     jump_urls.append('https://python.0x2048.com/wallpaper/?md5Str=' + _md5
+    #                      + "&index=" + str(index))
+    #     index = index + 1
 
     # print a.url
     return render_to_response('ins/index.html', {
@@ -120,7 +120,7 @@ def render(redisData, _md5):
         'avatar_url': avatar_url,
         'avatar_href': avatar_href,
         'imgs': imgs,
-        'jump_urls': jump_urls
+        'md5':_md5
     })
 
 
