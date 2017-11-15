@@ -40,9 +40,9 @@ def Coupon(request):
                 # replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
-                if '壁纸' in recMsg.Content:
-                    url = recMsg.Content[recMsg.Content.find('http'):len(
-                        recMsg.Content)]
+                if '壁纸' in recMsg.Content.strip():
+                    url = recMsg.Content.strip()[recMsg.Content.strip().find('http'):len(
+                        recMsg.Content.strip())]
                     print url
                     url = url + '?__a=1' + 'base64' + '0'
                     m = md5.new()
@@ -70,8 +70,8 @@ def Coupon(request):
                     else:
                         js = {
                             'url':
-                            recMsg.Content[recMsg.Content.find('http'):len(
-                                recMsg.Content)] + '?__a=1',
+                            recMsg.Content.strip()[recMsg.Content.strip().find('http'):len(
+                                recMsg.Content.strip())] + '?__a=1',
                             'index':
                             0
                         }
@@ -110,17 +110,17 @@ def Coupon(request):
                                                    fromUser, str_md5)
                                 return HttpResponse(wallInf)
 
-                elif 'instagram.com' in recMsg.Content:
+                elif 'instagram.com' in recMsg.Content.strip():
                     # 保存数据库
                     m = md5.new()
-                    m.update(recMsg.Content)
+                    m.update(recMsg.Content.strip())
                     str_md5 = m.hexdigest()
                     savedIns = Ins.objects.filter(md5=str_md5).exclude()
                     if len(savedIns) == 0:
-                        ins = Ins(md5=str_md5, url=recMsg.Content + '?__a=1')
+                        ins = Ins(md5=str_md5, url=recMsg.Content.strip() + '?__a=1')
                         ins.save()
 
-                    redisData = _get_redis_task(recMsg.Content + '?__a=1')
+                    redisData = _get_redis_task(recMsg.Content.strip() + '?__a=1')
                     if redisData is not None:
                         resultMsg = userInfo(redisData, toUser, fromUser,
                                              str_md5)
@@ -128,11 +128,11 @@ def Coupon(request):
                     else:
                         _redis_ = _redis.RedisC()
                         r = _redis_._redis_()
-                        r.rpush('ins', recMsg.Content + '?__a=1')
+                        r.rpush('ins', recMsg.Content.strip() + '?__a=1')
                         redisData = None
                         while redisData == None:
                             redisData = _get_redis_task(
-                                recMsg.Content + '?__a=1')
+                                recMsg.Content.strip() + '?__a=1')
                             if redisData is not None:
                                 resultMsg = userInfo(redisData, toUser,
                                                      fromUser, str_md5)
