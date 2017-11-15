@@ -194,7 +194,7 @@
                         return response.text()
 
                     }).then(function (body) {
-                        event.srcElement.src = "data:image/jpg;base64," + base64
+                        event.srcElement.src = "data:image/jpg;base64," + body
                         // callback(body)
                     })
                 }
