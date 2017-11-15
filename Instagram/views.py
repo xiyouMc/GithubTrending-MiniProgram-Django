@@ -137,7 +137,7 @@ def render(redisData, _md5, url):
     # else:
     #     imgs.append(display_resources[len(display_resources) - 1].get('src'))
     isVideo = js.get('isVideo')
-    if isVideo:
+    if not isVideo:
         avatar_name = js.get('avatar_name')
         avatar_url = js.get('avatar_url')
         avatar_href = js.get('avatar_href')
