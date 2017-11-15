@@ -40,7 +40,7 @@ def Coupon(request):
                 # replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
-                if '壁纸' in recMsg.Content.strip() and '.instagram.com' in recMsg.Content.strip():
+                if '壁纸' in recMsg.Content.strip() and 'instagram.com' in recMsg.Content.strip():
                     url = recMsg.Content.strip()[recMsg.Content.strip().find(
                         'http'):len(recMsg.Content.strip())]
                     print url
@@ -101,7 +101,7 @@ def Coupon(request):
                                 return HttpResponse(wallInf)
                             endTime = time.time()
 
-                elif '.instagram.com' in recMsg.Content.strip():
+                elif 'instagram.com' in recMsg.Content.strip():
                     # 保存数据库
                     m = md5.new()
                     m.update(recMsg.Content.strip())
