@@ -1,12 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 import json
 from models import Ins, WallPaper
 import requests
 from GithubTrendingDjango import _redis
+
+
+def imgToBase64(request):
+    imgUrl = request.GET['imgUrl']
+    imgBase64 = _get_redis_task(imgUrl)
+    if imgBase64 is not None:
+        return HttpResponse(imgBase64)
+    else:
+        _redis_push('imgToBase64', imgUrl)
+        imgBase64 = None
+        while imgBase64 is None:
+            imgBase64 = _get_redis_task(imgUrl)
+            if imgBase64 is not None:
+                return HttpResponse(imgBase64)
 
 
 def wallpaper(request):

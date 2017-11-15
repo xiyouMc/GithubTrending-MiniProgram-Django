@@ -43,5 +43,6 @@ urlpatterns = [
     url(r'wx/', wx_requests.Coupon),
     url(r'^q/', InsViews.q),
     url(r'^donate/', InsViews.donate),
-    url(r'^wallpaper/', InsViews.wallpaper)
+    url(r'^wallpaper/', InsViews.wallpaper),
+    url(r'^imgtobase64/', InsViews.imgToBase64)
 ]
