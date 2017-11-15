@@ -41,8 +41,8 @@ def Coupon(request):
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
                 if '壁纸' in recMsg.Content.strip():
-                    url = recMsg.Content.strip()[recMsg.Content.strip().find('http'):len(
-                        recMsg.Content.strip())]
+                    url = recMsg.Content.strip()[recMsg.Content.strip().find(
+                        'http'):len(recMsg.Content.strip())]
                     print url
                     url = url + '?__a=1' + 'base64' + '0'
                     m = md5.new()
@@ -70,34 +70,24 @@ def Coupon(request):
                     else:
                         js = {
                             'url':
-                            recMsg.Content.strip()[recMsg.Content.strip().find('http'):len(
-                                recMsg.Content.strip())] + '?__a=1',
+                            recMsg.Content.strip()[recMsg.Content.strip().find(
+                                'http'):len(recMsg.Content.strip())] +
+                            '?__a=1',
                             'index':
                             0
                         }
                         _redis_push('base64', json.dumps(js))
-                        while base64Data is None:
+                        startTime = time.time()
+                        endTime = time.time()
+                        while base64Data is None and (
+                                endTime - startTime) < 15:
                             base64Data = _get_redis_task(url)
+                            print base64Data
                             if base64Data is not None:
                                 #存数据
                                 savedBase64 = WallPaper.objects.filter(
                                     md5=str_md5, index=0).exclude()
                                 if len(savedBase64) == 0:
-                                    # base64Obj = json.loads(base64Data)
-                                    # for obj in base64Obj:
-                                    #     bgc = obj.get('bgc')
-                                    #     base64Str = obj.get('base64')
-                                    #     radius = obj.get('radius')
-                                    #     location = obj.get('location')
-                                    #     url = obj.get('url')
-                                    #     wallpaper = WallPaper(
-                                    #         md5=str_md5,
-                                    #         url=url,
-                                    #         bgc=bgc,
-                                    #         radius=radius,
-                                    #         base64Str=base64Str,
-                                    #         location=location)
-                                    #     wallpaper.save()
                                     wallpaper = WallPaper(
                                         md5=str_md5,
                                         url=url,
@@ -109,6 +99,7 @@ def Coupon(request):
                                 wallInf = wallInfo(base64Data, toUser,
                                                    fromUser, str_md5)
                                 return HttpResponse(wallInf)
+                            endTime = time.time()
 
                 elif 'instagram.com' in recMsg.Content.strip():
                     # 保存数据库
@@ -117,10 +108,12 @@ def Coupon(request):
                     str_md5 = m.hexdigest()
                     savedIns = Ins.objects.filter(md5=str_md5).exclude()
                     if len(savedIns) == 0:
-                        ins = Ins(md5=str_md5, url=recMsg.Content.strip() + '?__a=1')
+                        ins = Ins(
+                            md5=str_md5, url=recMsg.Content.strip() + '?__a=1')
                         ins.save()
 
-                    redisData = _get_redis_task(recMsg.Content.strip() + '?__a=1')
+                    redisData = _get_redis_task(recMsg.Content.strip() +
+                                                '?__a=1')
                     if redisData is not None:
                         resultMsg = userInfo(redisData, toUser, fromUser,
                                              str_md5)
@@ -130,14 +123,19 @@ def Coupon(request):
                         r = _redis_._redis_()
                         r.rpush('ins', recMsg.Content.strip() + '?__a=1')
                         redisData = None
-                        while redisData == None:
+                        startTime = time.time()
+                        endTime = time.time()
+                        while redisData == None and (endTime - startTime) < 15:
                             redisData = _get_redis_task(
                                 recMsg.Content.strip() + '?__a=1')
+                            print redisData
                             if redisData is not None:
                                 resultMsg = userInfo(redisData, toUser,
                                                      fromUser, str_md5)
                                 return HttpResponse(resultMsg)
+                            endTime = time.time()
                             # else:
+
                             #     resultMsg = "success"
                             #     return HttpResponse(resultMsg)
 
