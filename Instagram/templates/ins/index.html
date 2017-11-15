@@ -69,6 +69,14 @@
         padding-left: 10px;
     }
 
+    .convert {
+        font-size: 20px;
+        text-align: center;
+        margin: 10px;
+        margin-bottom: 0px;
+        padding-left: 10px;
+    }
+
     #caption_shot {
         font-size: 14px;
         text-align: justify;
@@ -204,17 +212,20 @@
                     // callback(body)
                 })
             }
-        </script> {% for index in nums %}
-        <p class="date">
-            <a href="https://python.0x2048.com/wallpaper/?md5Str={{ md5 }}&index={{ index }}&url={{ url }}" target="_blank" style="color:dimgray;">转换为壁纸{{ index }}</a>
-        </p>
-        {% endfor %}
+        </script>
+        
 
         <p class="date">
             <a href="https://instagram.com/p/{{ short_code }}/" target="_blank" style="color:dimgray;">{{createTime}}</a>
         </p>
 
         <p id="caption">△ 🌈happy weekend</p>
+
+        {% for index in nums %}
+        <p class="convert">
+            <a href="https://python.0x2048.com/wallpaper/?md5Str={{ md5 }}&index={{ index }}&url={{ url }}" target="_blank" style="color:dimgray;">将第{{ index }}张图片转为壁纸{{ index }}</a>
+        </p>
+        {% endfor %}
 
         <br>
         <br>
