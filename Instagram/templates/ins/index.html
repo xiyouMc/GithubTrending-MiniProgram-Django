@@ -186,8 +186,8 @@
                 console.log(url)
                 fetch(url, {
                     method: 'GET',
-                    dataType: 'jsonp',
-                    crossDomain: true,
+                    // dataType: 'jsonp',
+                    // crossDomain: true,
                 }).then(function (response) {
                     console.log(response)
                     callback(response)
