@@ -173,27 +173,31 @@
         <br>
         <br> {% for img in imgs %}
 
-        <img src='{{ img }}' alt='VPN需连接！点击 强制刷新' class="content" onerror='' onclick='imgerror(event,(base64)=>{
-            event.srcElement.src = "data:image/jpg;base64," + base64
-        })'/>
-        <!-- <a id="btn" onclick="refresh()">强制显示</a> -->
+        <img src='{{ img }}' alt='VPN需连接！点击 强制刷新' class="content" onerror='imgError()' onclick='clickError()' />
+        <!-- <a id="{{ img }}" onclick="refresh()">强制显示</a> -->
         <br>
         <br> {% endfor %}
         <script>
-            var imgerror = function (event, callback) {
-                console.log('imgerror' + event.srcElement.src)
-                let url = 'https://python.0x2048.com/imgtobase64/?imgUrl=' + event.srcElement.src, self = this;
-                console.log(url)
-                fetch(url, {
-                    method: 'GET',
-                    // dataType: 'jsonp',
-                    // crossDomain: true,
-                }).then(function (response) {
-                    return response.text()
+            var imgError = function (event) {
+                event.srcElement.isError = true
+            }
+            var clickError = function (event) {
+                if (event.srcElement.isError) {
+                    console.log('imgerror' + event.srcElement.src)
+                    let url = 'https://python.0x2048.com/imgtobase64/?imgUrl=' + event.srcElement.src, self = this;
+                    console.log(url)
+                    fetch(url, {
+                        method: 'GET',
+                        // dataType: 'jsonp',
+                        // crossDomain: true,
+                    }).then(function (response) {
+                        return response.text()
 
-                }).then(function (body) {
-                    callback(body)
-                })
+                    }).then(function (body) {
+                        event.srcElement.src = "data:image/jpg;base64," + base64
+                        // callback(body)
+                    })
+                }
             }
         </script> {% for index in nums %}
         <p class="date">
