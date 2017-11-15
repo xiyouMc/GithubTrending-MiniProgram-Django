@@ -173,15 +173,16 @@
         <br>
         <br> {% for img in imgs %}
 
-        <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='imgerror(img,(base64)=>{
-            this.src = "data:image/jpg;base64," + base64
+        <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='imgerror(event,(base64)=>{
+            event.srcElement.src = "data:image/jpg;base64," + base64
         })' />
 
         <br>
         <br> {% endfor %}
         <script>
-            var imgerror = function (img, callback) {
-                let url = 'https://python.0x2048.com/imgtobase64/?imgUrl=' + img, self = this;
+            var imgerror = function (event, callback) {
+                console.log('imgerror' + event.srcElement.src)
+                let url = 'https://python.0x2048.com/imgtobase64/?imgUrl=' + event.srcElement.src, self = this;
                 fetch(url, {
                     method: 'GET'
                 }).then(function (response) {
