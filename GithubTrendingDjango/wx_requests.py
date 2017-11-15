@@ -150,9 +150,12 @@ def Coupon(request):
                 if recMsg.Event == 'subscribe':
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
-                    helpText = reply.TextMsg(toUser,fromUser,'insloader | 使用帮助 , 点击 https://python.0x2048.com/help/ 。在这里你可以保存 Ins 上的照片和视频，同时你也可以制作精美的壁纸。</a >')
+                    helpText = reply.TextMsg(toUser,fromUser,'insloader | 使用帮助 , 点击 https://python.0x2048.com/help/ 。在这里你可以保存 Ins 上的照片和视频，同时你也可以制作精美的壁纸。')
                     return HttpResponse(helpText.send())
-
+                else:
+                    print "暂且不处理"
+                    resultMsg = "success"
+                    return HttpResponse(resultMsg)
 
             else:
                 print "暂且不处理"
