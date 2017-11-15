@@ -189,8 +189,8 @@
                     // dataType: 'jsonp',
                     // crossDomain: true,
                 }).then(function (response) {
-                    console.log(response)
-                    callback(response)
+                    console.log(response.body)
+                    callback(response.body)
                 })
             }
         </script> {% for index in nums %}
