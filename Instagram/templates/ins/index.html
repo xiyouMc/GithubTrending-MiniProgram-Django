@@ -173,8 +173,7 @@
         <br>
         <br> {% for img in imgs %}
 
-        <img src='https://scontent-hkg3-1.cdninstagram.com/t51.2885-15/e35/21435456_875616002615084_33659214685032_n.jpg' alt='VPN需连接！'
-            class="content" onerror='imgerror(event,(base64)=>{
+        <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='imgerror(event,(base64)=>{
             event.srcElement.src = "data:image/jpg;base64," + base64
         })' />
 
@@ -183,7 +182,7 @@
         <script>
             var imgerror = function (event, callback) {
                 console.log('imgerror' + event.srcElement.src)
-                let url = 'https://python.0x2048.com/imgtobase64/?imgUrl=https://scontent-hkg3-1.cdninstagram.com/t51.2885-15/e35/21435456_875616002615084_3365921468503293952_n.jpg', self = this;
+                let url = 'https://python.0x2048.com/imgtobase64/?imgUrl=' + event.srcElement.src, self = this;
                 console.log(url)
                 fetch(url, {
                     method: 'GET',
