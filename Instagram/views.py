@@ -180,7 +180,7 @@ def render(redisData, _md5, url):
             'avatar_href': avatar_href,
             'avatar_name': avatar_name,
             'createTime': createTime,
-            'shortcode': shortcode
+            'short_code': shortcode
         })
 
 
