@@ -8,6 +8,7 @@ import json
 from models import Ins, WallPaper
 import requests
 from GithubTrendingDjango import _redis
+import time
 
 
 def imgToBase64(request):
@@ -18,10 +19,14 @@ def imgToBase64(request):
     else:
         _redis_push('imgToBase64', imgUrl)
         imgBase64 = None
-        while imgBase64 is None:
+        startTime = time.time()
+        endTime = time.time()
+        while imgBase64 is None and (endTime - startTime) < 15:
             imgBase64 = _get_redis_task(imgUrl)
+            print imgBase64
             if imgBase64 is not None:
                 return HttpResponse(imgBase64)
+            endTime = time.time()
 
 
 def wallpaper(request):
