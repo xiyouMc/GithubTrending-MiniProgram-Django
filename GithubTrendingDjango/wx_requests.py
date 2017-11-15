@@ -138,7 +138,9 @@ def Coupon(request):
 
                             #     resultMsg = "success"
                             #     return HttpResponse(resultMsg)
-
+                elif '帮助' or 'help' in recMsg.Content.strip():
+                    helpText = reply.TextMsg(toUser,fromUser,'<a href="https://python.0x2048.com/help/">insloader | 使用帮助</a >')
+                    return HttpResponse(helpText.send())
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
