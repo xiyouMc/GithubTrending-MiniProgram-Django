@@ -171,23 +171,19 @@
             class="content" /> -->
         <!-- data:image/jpg;base64,  -->
         <br>
-        <br> 
-        {% for img in imgs %}
-       
-        <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='' />
-        
-        <br>
-        <br> 
-        {% endfor %}
+        <br> {% for img in imgs %}
 
-        {% for index in nums %}
+        <img src='{{ img }}' alt='VPN需连接！' class="content" onerror='' />
+
+        <br>
+        <br> {% endfor %} {% for index in nums %}
         <p class="date">
             <a href="https://python.0x2048.com/wallpaper/?md5Str={{ md5 }}&index={{ index }}&url={{ url }}" target="_blank" style="color:dimgray;">转换为壁纸{{ index }}</a>
         </p>
         {% endfor %}
 
         <p class="date">
-            <a href="{{ create_href}}" target="_blank" style="color:dimgray;">{{create_time}}</a>
+            <a href="https://instagram.com/p/{{ short_code }}/" target="_blank" style="color:dimgray;">{{createTime}}</a>
         </p>
 
         <p id="caption">△ 🌈happy weekend</p>

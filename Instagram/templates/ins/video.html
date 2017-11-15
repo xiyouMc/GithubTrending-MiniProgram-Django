@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html> 
+<Link Rel="SHORTCUT ICON" href="/static/img/favicon.ico">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html";>
+<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,  user-scalable=no">
+<title>inskeeper｜微信公众号</title>
+<style>
+
+body{ margin:0; padding:5;max-width: 640px;margin-right: auto;margin-left: auto;color:dimgray;font-family:Arial;}
+.header{
+    margin-bottom: 10px;
+}
+.owner{
+    float: left; width: 70%;margin-bottom: 10px
+}
+.content{
+    width: 100%;
+    max-width:640px;
+    z-index: 2;
+}
+    .right{padding:0;margin:0px;width:100%;text-align:center; }
+
+
+    .right-box{ width: 25% ;padding-top:0;margin-top:0;
+    height: 36px;
+    line-height: 36px;
+    display: inline-block;
+    text-align: center;
+    background: #e26d6d;
+    color: #fff;
+    border-radius: 4px;}
+    .right-title{ width: 100% ;text-align:center;font-size:10px;margin-top: 10px}
+
+.date {
+    font-size:14px;text-align:right;margin:10px; margin-bottom:0px;padding-left: 10px;
+}
+
+#caption_shot {font-size:14px;text-align:justify; padding:10px;margin-top: 0px;}
+#caption {font-size:14px;text-align:justify; padding:10px;margin-top: 0px;}
+
+a {TEXT-DECORATION:none;color: dimgray}
+.avatar {width: 30px; auto; border-radius:50%;vertical-align:middle;margin:0;margin-left: 8px; }
+.video-dl {color: black;background-color: #DCDCDC;font-size: 0.8em;}
+.help{text-decoration: underline;font-size: 0.8em;}
+
+
+.bz-button{
+    float: right;
+    width: 25%;
+    text-align: 
+    right;margin-bottom: 10px;
+    margin-right:8px;
+    z-index: 100; 
+    position: relative;
+    top:5px;
+    display: inline-block;
+}
+.bz-button-content {
+    right: 0;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px 10px;
+    z-index: 1;
+}
+.bz-button:hover .bz-button-content {
+    display: block;
+    font-size: 12px;
+}
+
+
+
+
+
+.ad{
+    border:solid; 
+    border-width:1px; 
+    border-color:lightgray;
+    margin: 5px;
+    padding:5px;
+    width: 93%;
+
+}
+
+
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+
+
+<div  ontouchstart="" class="content" >
+
+<div class="header">
+    <div class="owner">
+        <img class="avatar" src="{{ avatar_url }}"/> <a href="{{ avatar_href }}"> {{ avatar_name }}</a>
+    </div>
+</div>
+
+<video class= "content" controls poster="{{ jpgUrl }}">
+<source src="{{ videoUrl }}";  type="video/mp4">  </video>
+<p class="date" ><a href="https://instagram.com/p/{{ short_code }}/" target="_blank" >{{ createTime }}</a></p>
+
+<p id="caption" >{{ desc }}</p>
+</div>
+<p><a class="video-dl"  href="{{ videoUrl }}" download="{{ avatar_name }}video.mp4">「在浏览器中打开」后，长按此处下载</a> <a class='help' href="http://mp.weixin.qq.com/s?__biz=MzIwNTI1MDIyMA==&mid=403467451&idx=1&sn=22ea0afa00a0466d4fb4affa4e32b7a9">[教程]</a></p><br>
+<br><br><br>
+<div class="right">
+
+<div class='right-box'/><a href="https://python.0x2048.com/donate/"  style="color: white;">打 赏</a></div>
+<p style="font-size:0.8em;text-align:center;margin-left:5px;padding: 5px;line-height: 100% ">「insloader」为个人维护项目，谢谢您的支持 ^_^</p> 
+</div>
+<br><br><br>
+
+<p style="font-size:0.8em;text-align:left;margin-left:5px;padding: 5px;line-height: 150% ">
+- VPN需连接！长按存图（多张则点击后保存）；<a href="http://mp.weixin.qq.com/s?__biz=MzIwNTI1MDIyMA==&mid=503658832&idx=1&sn=7cc802c924d716df77b723a9030b0665" style="color:#e26d6d">图片未显示，或无法保存 </a> <点此</p> 
+
+
+</body>
+</html>

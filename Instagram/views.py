@@ -136,27 +136,52 @@ def render(redisData, _md5, url):
     #         imgs.append(img)
     # else:
     #     imgs.append(display_resources[len(display_resources) - 1].get('src'))
-    avatar_name = js.get('avatar_name')
-    avatar_url = js.get('avatar_url')
-    avatar_href = js.get('avatar_href')
-    imgs = js.get('imgsBase64')
-    index = 0
-    jump_urls = []
-    # for img in imgs:
-    #     jump_urls.append('https://python.0x2048.com/wallpaper/?md5Str=' + _md5
-    #                      + "&index=" + str(index))
-    #     index = index + 1
+    isVideo = js.get('isVideo')
+    if isVideo:
+        avatar_name = js.get('avatar_name')
+        avatar_url = js.get('avatar_url')
+        avatar_href = js.get('avatar_href')
+        imgs = js.get('imgsBase64')
+        createTime = js.get('createTime')
+        shortcode = js.get('shortcode')
+        index = 0
+        jump_urls = []
+        # for img in imgs:
+        #     jump_urls.append('https://python.0x2048.com/wallpaper/?md5Str=' + _md5
+        #                      + "&index=" + str(index))
+        #     index = index + 1
 
-    # print a.url
-    return render_to_response('ins/index.html', {
-        'avatar_name': avatar_name,
-        'avatar_url': avatar_url,
-        'avatar_href': avatar_href,
-        'imgs': imgs,
-        'md5': _md5,
-        'url': url,
-        'nums': range(len(imgs))
-    })
+        # print a.url
+        return render_to_response('ins/index.html', {
+            'avatar_name': avatar_name,
+            'avatar_url': avatar_url,
+            'avatar_href': avatar_href,
+            'imgs': imgs,
+            'md5': _md5,
+            'url': url,
+            'nums': range(len(imgs)),
+            'createTime': createTime,
+            'shortcode': shortcode
+        })
+    else:
+        videoUrl = js.get('videoUrl')
+        jpgUrl = js.get('jpgUrl')
+        desc = js.get('desc')
+        avatar_url = js.get('avatar_url')
+        avatar_href = js.get('avatar_href')
+        avatar_name = js.get('avatar_name')
+        createTime = js.get('createTime')
+        shortcode = js.get('shortcode')
+        return render_to_response('ins/video.html', {
+            'videoUrl': videoUrl,
+            'jpgUrl': jpgUrl,
+            'desc': desc,
+            'avatar_url': avatar_url,
+            'avatar_href': avatar_href,
+            'avatar_name': avatar_name,
+            'createTime': createTime,
+            'shortcode': shortcode
+        })
 
 
 def _get_redis_task(key):
