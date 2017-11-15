@@ -11,6 +11,9 @@ from GithubTrendingDjango import _redis
 import time
 
 
+def help(request):
+    return render_to_response('ins/help.html',{})
+
 def imgToBase64(request):
     imgUrl = request.GET['imgUrl']
     imgBase64 = _get_redis_task(imgUrl)

@@ -44,5 +44,6 @@ urlpatterns = [
     url(r'^q/', InsViews.q),
     url(r'^donate/', InsViews.donate),
     url(r'^wallpaper/', InsViews.wallpaper),
-    url(r'^imgtobase64/', InsViews.imgToBase64)
+    url(r'^imgtobase64/', InsViews.imgToBase64),
+    url(r'^help/', InsViews.help)
 ]
