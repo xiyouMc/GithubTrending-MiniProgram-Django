@@ -40,7 +40,7 @@ def Coupon(request):
                 # replyMsg = reply.TextMsg(toUser, fromUser, 'avatar_name')
                 # resultMsg= replyMsg.send()
                 # return HttpResponse(replyMsg.send())
-                if '壁纸' in recMsg.Content.strip():
+                if '壁纸' in recMsg.Content.strip() and '.instagram.com' in recMsg.Content.strip():
                     url = recMsg.Content.strip()[recMsg.Content.strip().find(
                         'http'):len(recMsg.Content.strip())]
                     print url
@@ -80,7 +80,7 @@ def Coupon(request):
                         startTime = time.time()
                         endTime = time.time()
                         while base64Data is None and (
-                                endTime - startTime) < 15:
+                                endTime - startTime) < 8:
                             base64Data = _get_redis_task(url)
                             print base64Data
                             if base64Data is not None:
@@ -101,7 +101,7 @@ def Coupon(request):
                                 return HttpResponse(wallInf)
                             endTime = time.time()
 
-                elif 'instagram.com' in recMsg.Content.strip():
+                elif '.instagram.com' in recMsg.Content.strip():
                     # 保存数据库
                     m = md5.new()
                     m.update(recMsg.Content.strip())
@@ -125,7 +125,7 @@ def Coupon(request):
                         redisData = None
                         startTime = time.time()
                         endTime = time.time()
-                        while redisData == None and (endTime - startTime) < 15:
+                        while redisData == None and (endTime - startTime) < 8:
                             redisData = _get_redis_task(
                                 recMsg.Content.strip() + '?__a=1')
                             print redisData
@@ -144,8 +144,8 @@ def Coupon(request):
                 
                 else:
                     print "暂且不处理"
-                    resultMsg = "success"
-                    return HttpResponse(resultMsg)
+                    helpText = reply.TextMsg(toUser,fromUser,'你貌似输错了。点击 https://python.0x2048.com/help/" |insloader | 使用帮助</a >')
+                    return HttpResponse(helpText.send())
             elif isinstance(recMsg, receive.Event) and recMsg.MsgType == 'event':
                 if recMsg.Event == 'subscribe':
                     toUser = recMsg.FromUserName
