@@ -138,13 +138,22 @@ def Coupon(request):
 
                             #     resultMsg = "success"
                             #     return HttpResponse(resultMsg)
-                elif '帮助' or 'help' in recMsg.Content.strip():
+                elif '帮助' in recMsg.Content.strip() or  'help' in recMsg.Content.strip():
                     helpText = reply.TextMsg(toUser,fromUser,'<a href="https://python.0x2048.com/help/">insloader | 使用帮助</a >')
                     return HttpResponse(helpText.send())
+                
                 else:
                     print "暂且不处理"
                     resultMsg = "success"
                     return HttpResponse(resultMsg)
+            elif isinstance(recMsg, receive.Event) and recMsg.MsgType == 'event':
+                if recMsg.Event == 'subscribe':
+                    toUser = recMsg.FromUserName
+                    fromUser = recMsg.ToUserName
+                    helpText = reply.TextMsg(toUser,fromUser,'insloader | 使用帮助 , 点击 https://python.0x2048.com/help/ 。在这里你可以保存 Ins 上的照片和视频，同时你也可以制作精美的壁纸。</a >')
+                    return HttpResponse(helpText.send())
+
+
             else:
                 print "暂且不处理"
                 resultMsg = "success"
