@@ -35,3 +35,5 @@ def alipay(request):
 
 def ys(request):
     return render_to_response('github/ys.html')
+def jiandan(request):
+    return render_to_response('github/jiandan.html')

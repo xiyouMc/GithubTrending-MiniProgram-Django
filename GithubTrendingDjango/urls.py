@@ -50,5 +50,6 @@ urlpatterns = [
     url(r'^help/', InsViews.help),
     url(r'^alipay/',Github_views.alipay),
     url(r'^ys/',Github_views.ys),
+    url(r'^jiandan/',Github_views.jiandan),
     url(r'^alipay1/',RedirectView.as_view(url=urlStr))
 ]
