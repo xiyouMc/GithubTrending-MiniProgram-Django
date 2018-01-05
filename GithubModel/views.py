@@ -40,16 +40,16 @@ def redpack(request):
 def ys(request):
     return render_to_response('github/ys.html')
 def jiandan(request):
-    return render_to_response('github/alipay.html')
+    return render_to_response('github/ys.html')
 
 def suiyue(request):
-    return render_to_response('github/alipay.html')
+    return render_to_response('github/ys.html')
 
 def monster(request):
-    return render_to_response('github/alipay.html')
+    return render_to_response('github/ys.html')
 
 def tongtong(request):
-    return render_to_response('github/alipay.html')
+    return render_to_response('github/ys.html')
 
 def root(request):
     return render_to_response('github/root.html')
