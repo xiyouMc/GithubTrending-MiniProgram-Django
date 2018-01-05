@@ -44,3 +44,5 @@ def jiandan(request):
 
 def suiyue(request):
     return render_to_response('github/alipay.html')
+def monster(request):
+    return render_to_response('github/monster.html')
