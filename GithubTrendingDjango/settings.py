@@ -38,7 +38,7 @@ STATIC_ROOT = os.path.join(
 SECRET_KEY = 'ck(4j1s&-_n+g(^slxva$(d9lz$^x)+4&fiuad)k(&rco0k(%3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TIME_ZONE = 'Asia/Shanghai'
 
