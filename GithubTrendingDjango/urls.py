@@ -48,10 +48,11 @@ urlpatterns = [
     url(r'^wallpaper/', InsViews.wallpaper),
     url(r'^imgtobase64/', InsViews.imgToBase64),
     url(r'^help/', InsViews.help),
-    url(r'^alipay/',Github_views.alipay),
-    url(r'^ys/',Github_views.ys),
-    url(r'^jiandan/',Github_views.jiandan),
-    url(r'^suiyue/',Github_views.suiyue),
-    url(r'^monster/',Github_views.monster),
-    url(r'^alipay1/',Github_views.redpack)
+    url(r'^alipay/', Github_views.alipay),
+    url(r'^ys/', Github_views.ys),
+    url(r'^jiandan/', Github_views.jiandan),
+    url(r'^suiyue/', Github_views.suiyue),
+    url(r'^monster/', Github_views.monster),
+    url(r'^tongtong/', Github_views.tongtong),
+    url(r'^alipay1/', Github_views.redpack)
 ]
