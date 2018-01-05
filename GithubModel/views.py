@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 import json
+from django import http
 
 # Create your views here.
 d = {
@@ -32,6 +33,9 @@ def index(request):
 
 def alipay(request):
     return render_to_response('github/alipay.html')
+
+def redpack(request):
+    return http.HttpResponsePermanentRedirect ('https://qr.alipay.com/c1x06567dcqbvxhljqd2e7e')
 
 def ys(request):
     return render_to_response('github/ys.html')
