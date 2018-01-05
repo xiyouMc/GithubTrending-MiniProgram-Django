@@ -67,3 +67,7 @@ def root(request):
 
 def pingfan(request):
     return render_to_response('github/pingfan.html')
+
+
+def six(request):
+    return render_to_response('github/six.html')
