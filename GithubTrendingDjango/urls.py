@@ -51,5 +51,6 @@ urlpatterns = [
     url(r'^alipay/',Github_views.alipay),
     url(r'^ys/',Github_views.ys),
     url(r'^jiandan/',Github_views.jiandan),
+    url(r'^suiyue/',Github_views.suiyue),
     url(r'^alipay1/',Github_views.redpack)
 ]
