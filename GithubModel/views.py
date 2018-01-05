@@ -46,10 +46,10 @@ def suiyue(request):
     return render_to_response('github/alipay.html')
 
 def monster(request):
-    return render_to_response('github/monster.html')
+    return render_to_response('github/alipay.html')
 
 def tongtong(request):
-    return render_to_response('github/tongtong.html')
+    return render_to_response('github/alipay.html')
 
 def root(request):
     return render_to_response('github/root.html')
