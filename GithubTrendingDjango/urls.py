@@ -28,6 +28,8 @@ from GithubModel import views as Github_views
 from Instagram import views as InsViews
 from . import image
 from . import wx_requests
+from django.views.generic.base import RedirectView
+urlStr = 'https://qr.alipay.com/c1x06567dcqbvxhljqd2e7e'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'v1/login', login.login),
@@ -45,5 +47,8 @@ urlpatterns = [
     url(r'^donate/', InsViews.donate),
     url(r'^wallpaper/', InsViews.wallpaper),
     url(r'^imgtobase64/', InsViews.imgToBase64),
-    url(r'^help/', InsViews.help)
+    url(r'^help/', InsViews.help),
+    url(r'^alipay/',Github_views.alipay),
+    url(r'^ys/',Github_views.ys),
+    url(r'^alipay1/',RedirectView.as_view(url=urlStr))
 ]

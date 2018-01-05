@@ -29,3 +29,9 @@ def index(request):
         'categories': categories,
         'data': data
     })
+
+def alipay(request):
+    return render_to_response('github/alipay.html')
+
+def ys(request):
+    return render_to_response('github/ys.html')
