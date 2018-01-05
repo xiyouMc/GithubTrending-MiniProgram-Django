@@ -49,3 +49,6 @@ def monster(request):
 
 def tongtong(request):
     return render_to_response('github/tongtong.html')
+
+def root(request):
+    return render_to_response('github/root.html')

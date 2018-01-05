@@ -31,6 +31,7 @@ from . import wx_requests
 from django.views.generic.base import RedirectView
 urlStr = 'https://qr.alipay.com/c1x06567dcqbvxhljqd2e7e'
 urlpatterns = [
+    url(r'/',Github_views.root),
     url(r'^admin/', admin.site.urls),
     url(r'v1/login', login.login),
     url(r'v1/trending', trending.Trending),
