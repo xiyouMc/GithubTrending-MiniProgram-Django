@@ -50,15 +50,15 @@ def jiandan(request):
 
 
 def suiyue(request):
-    return render_to_response('github/ys.html')
+    return render_to_response('github/suiyue.html')
 
 
 def monster(request):
-    return render_to_response('github/ys.html')
+    return render_to_response('github/monster.html')
 
 
 def tongtong(request):
-    return render_to_response('github/ys.html')
+    return render_to_response('github/tongtong.html')
 
 
 def root(request):
