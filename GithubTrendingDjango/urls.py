@@ -57,5 +57,6 @@ urlpatterns = [
     url(r'^tongtong/', Github_views.tongtong),
     # url(r'^pingfan/', Github_views.pingfan),
     # url(r'^six/', Github_views.six),
+    url(r'^mrj/', Github_views.mrj),
     url(r'^alipay1/', Github_views.redpack)
 ]

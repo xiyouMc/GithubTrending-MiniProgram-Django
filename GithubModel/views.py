@@ -54,7 +54,7 @@ def suiyue(request):
 
 
 def monster(request):
-    return render_to_response('github/monster.html')
+    return render_to_response('github/alipay.html')
 
 
 def tongtong(request):
@@ -71,3 +71,6 @@ def pingfan(request):
 
 def six(request):
     return render_to_response('github/six.html')
+
+def mrj(request):
+    return render_to_response('github/mrj.html')
