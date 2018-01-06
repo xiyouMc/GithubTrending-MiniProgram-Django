@@ -54,7 +54,7 @@ def suiyue(request):
 
 
 def monster(request):
-    return render_to_response('github/alipay.html')
+    return render_to_response('github/monster.html')
 
 
 def tongtong(request):
