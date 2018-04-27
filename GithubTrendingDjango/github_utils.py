@@ -6,7 +6,7 @@ import re
 
 def get_auth_token(text):
     return re.findall(
-        '<input name="authenticity_token" type="hidden" value="(.*?)"', text)
+        '<input type="hidden" name="authenticity_token" value="(.*?)"', text)
 
 
 def read_cookies(username):
