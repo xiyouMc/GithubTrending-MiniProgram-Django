@@ -27,16 +27,17 @@ def GithubStarStatus(request):
             _json_repos = json.loads(repos)
             username = request.GET['username']
             model.s.cookies = read_cookies(username)
-            threads = []
+            # threads = []
             model.repo_size = len(_json_repos)
             for repo in _json_repos:
-                t = threading.Thread(target=status, args=(repo, model))
-                threads.append(t)
-            for t in threads:
-                t.setDaemon(True)
-                t.start()
-            while model.repo_size is not 0:
-                pass
+                status(repo,model)
+            #     t = threading.Thread(target=status, args=(repo, model))
+            #     threads.append(t)
+            # for t in threads:
+            #     t.setDaemon(True)
+            #     t.start()
+            # while model.repo_size is not 0:
+            #     pass
             print 'model._repos',model._repos
             _json_resp = json.dumps(model._repos)
             return HttpResponse(_json_resp)
