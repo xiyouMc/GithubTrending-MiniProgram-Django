@@ -41,7 +41,7 @@ def login(request):
 
         user = re.findall('<meta name="user-login" content="(.*?)"',
                           session.text)
-        avatar = re.findall(' class="avatar.*" src="(.*?)"', session.text)
+        avatar = re.findall('@'+user+'.* src="(.*?)"', session.text)
         print avatar[0]
         m2 = hashlib.md5()
         m2.update(user[0] + github_token.token)
