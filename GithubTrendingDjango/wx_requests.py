@@ -34,6 +34,7 @@ def Coupon(request):
                 return HttpResponse(a)
         elif request.method == 'POST':
             recMsg = receive.parse_xml(request.body)
+            print recMsg
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
