@@ -103,6 +103,8 @@ def Coupon(request):
                             endTime = time.time()
 
                 elif 'instagram.com' in recMsg.Content.strip():
+                    if '?' in recMsg.Content.strip():
+                        recMsg.Content = recMsg.Content.strip().split('?')[0]
                     # 保存数据库
                     m = md5.new()
                     m.update(recMsg.Content.strip())
