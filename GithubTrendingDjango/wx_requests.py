@@ -171,30 +171,32 @@ def Coupon(request):
 
 
 def wallInfo(base64Data, toUser, fromUser, _md5):
-    picUrl = json.loads(base64Data).get('picUrl')
-    replyImgMsg = reply.ImgText(
-        toUser, fromUser, 'WallPaper', picUrl,
-        'https://python.0x2048.com/wallpaper/?md5Str=' + _md5 + "&index=0")
+    return base64Data
+    # picUrl = json.loads(base64Data).get('picUrl')
+    # replyImgMsg = reply.ImgText(
+    #     toUser, fromUser, 'WallPaper', picUrl,
+    #     'https://python.0x2048.com/wallpaper/?md5Str=' + _md5 + "&index=0")
 
-    result = replyImgMsg.send()
-    # print result
-    # replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
-    return result
+    # result = replyImgMsg.send()
+    # # print result
+    # # replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
+    # return result
 
 
 def userInfo(redisData, toUser, fromUser, _md5):
     js = json.loads(redisData)
-    avatar_url = js.get('avatar_url')
-    avatar_href = js.get('avatar_href')
-    avatar_name = js.get('avatar_name')
+    return redisData
+    # avatar_url = js.get('avatar_url')
+    # avatar_href = js.get('avatar_href')
+    # avatar_name = js.get('avatar_name')
 
-    replyImgMsg = reply.ImgText(toUser, fromUser, avatar_name, avatar_url,
-                                'https://python.0x2048.com/q/?md5Str=' + _md5)
+    # replyImgMsg = reply.ImgText(toUser, fromUser, avatar_name, avatar_url,
+    #                             'https://python.0x2048.com/q/?md5Str=' + _md5)
 
-    result = replyImgMsg.send()
-    # print result
-    # replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
-    return result
+    # result = replyImgMsg.send()
+    # # print result
+    # # replyMsg = reply.TextMsg(toUser, fromUser, avatar_name)
+    # return result
 
 
 def _get_redis_task(key):
