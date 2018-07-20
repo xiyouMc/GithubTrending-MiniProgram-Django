@@ -38,6 +38,9 @@ class TextMsg(Msg):
     def __init__(self, xmlData):
         Msg.__init__(self, xmlData)
         self.Content = xmlData.find('Content').text.encode("utf-8")
+        self.NeedAddWH = '1'
+        if xmlData.find('NeedAddWH') is not None:
+            self.NeedAddWH =xmlData.find('NeedAddWH').text# 0 | 1 0:no need 1:need
 
 
 class ImageMsg(Msg):

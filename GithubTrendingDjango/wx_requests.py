@@ -11,7 +11,7 @@ from Instagram.models import Ins, WallPaper
 import md5
 import _redis
 
-
+# https://www.instagram.com/stephencurry30
 def Coupon(request):
     try:
         print request.method
@@ -103,20 +103,22 @@ def Coupon(request):
                             endTime = time.time()
 
                 elif 'instagram.com' in recMsg.Content.strip():
-                    if '?' in recMsg.Content.strip():
+                    if '?' in recMsg.Content.strip() and recMsg.NeedAddWH.strip() == '1':
                         recMsg.Content = recMsg.Content.strip().split('?')[0]
                     # 保存数据库
                     m = md5.new()
                     m.update(recMsg.Content.strip())
                     str_md5 = m.hexdigest()
+                    requestUrl = recMsg.Content.strip()
+                    if recMsg.NeedAddWH.strip() == '1':
+                        requestUrl = recMsg.Content.strip() + '?__a=1'
                     savedIns = Ins.objects.filter(md5=str_md5).exclude()
                     if len(savedIns) == 0:
                         ins = Ins(
-                            md5=str_md5, url=recMsg.Content.strip() + '?__a=1')
+                            md5=str_md5, url=requestUrl)
                         ins.save()
 
-                    redisData = _get_redis_task(recMsg.Content.strip() +
-                                                '?__a=1')
+                    redisData = _get_redis_task(requestUrl)
                     if redisData is not None:
                         resultMsg = userInfo(redisData, toUser, fromUser,
                                              str_md5)
@@ -124,13 +126,14 @@ def Coupon(request):
                     else:
                         _redis_ = _redis.RedisC()
                         r = _redis_._redis_()
-                        r.rpush('ins', recMsg.Content.strip() + '?__a=1')
+                        r.rpush('ins', requestUrl)
+                        
                         redisData = None
                         startTime = time.time()
                         endTime = time.time()
                         while redisData == None and (endTime - startTime) < 8:
                             redisData = _get_redis_task(
-                                recMsg.Content.strip() + '?__a=1')
+                                requestUrl)
                             print redisData
                             if redisData is not None:
                                 resultMsg = userInfo(redisData, toUser,
