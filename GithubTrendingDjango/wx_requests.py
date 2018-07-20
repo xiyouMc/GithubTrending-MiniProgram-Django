@@ -10,6 +10,7 @@ import wx_reply as reply
 from Instagram.models import Ins, WallPaper
 import md5
 import _redis
+import base64
 
 # https://www.instagram.com/stephencurry30
 def Coupon(request):
@@ -115,7 +116,7 @@ def Coupon(request):
                     savedIns = Ins.objects.filter(md5=str_md5).exclude()
                     if len(savedIns) == 0:
                         ins = Ins(
-                            md5=str_md5, url=requestUrl)
+                            md5=str_md5, url=base64.b64encode(requestUrl))
                         ins.save()
 
                     redisData = _get_redis_task(requestUrl)
