@@ -12,7 +12,7 @@ import time
 
 class ConfigObj(object):
     def __init__(self):
-        self.isShowIns = True
+        self.isShowIns = False
 def Config(request):
     config = ConfigObj()
     return HttpResponse(json.dumps(config.__dict__))
