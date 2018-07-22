@@ -10,6 +10,12 @@ import requests
 from GithubTrendingDjango import _redis
 import time
 
+class ConfigObj(object):
+    def __init__(self):
+        self.isShowIns = True
+def Config(request):
+    config = ConfigObj()
+    return HttpResponse(json.dumps(config.__dict__))
 
 def help(request):
     return render_to_response('ins/help.html',{})
