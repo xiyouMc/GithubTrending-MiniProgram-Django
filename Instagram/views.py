@@ -117,6 +117,7 @@ def getOriginData(request):
     isVideo = 'mp4' in url
     isImage = 'png' in url or 'jpg' in url or 'jpeg' in url
     print redisData
+    print '--------------'
     if redisData is not None:
         contentType = ''
         if isVideo:
@@ -126,6 +127,8 @@ def getOriginData(request):
         return HttpResponse(redisData,content_type=contentType)
     else:
         # _write_redis_status('ins',url)
+        _redis_ = _redis.RedisC()
+        r = _redis_._redis_()
         r.rpush('ins', url)
         redisData = None
         # print  _get_redis_task(url)
