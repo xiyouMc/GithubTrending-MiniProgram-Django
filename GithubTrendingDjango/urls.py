@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^wallpaper/', InsViews.wallpaper),
     url(r'^imgtobase64/', InsViews.imgToBase64),
     url(r'^help/', InsViews.help),
-    url(r'^getOriginData/',InsViews.getOriginData)
+    url(r'^getorigindata/', InsViews.getOriginData),
     url(r'^alipay/', Github_views.alipay),
     url(r'^ys/', Github_views.ys),
     url(r'^jiandan1/', Github_views.jiandan),
