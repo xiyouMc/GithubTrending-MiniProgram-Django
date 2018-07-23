@@ -137,7 +137,7 @@ def getOriginData(request):
         endTime = time.time()
         while redisData == None and (endTime - startTime) < 8:
             redisData = _get_redis_task(url)
-            print redisData
+            # print redisData
             if redisData is not None:
                 contentType = ''
                 if isVideo:
