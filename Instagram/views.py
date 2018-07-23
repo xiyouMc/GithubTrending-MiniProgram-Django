@@ -130,7 +130,9 @@ def getOriginData(request):
         r.rpush('ins', url)
         redisData = None
         # print  _get_redis_task(url)
-        while redisData == None:
+        startTime = time.time()
+        endTime = time.time()
+        while redisData == None and (endTime - startTime) < 8:
             redisData = _get_redis_task(url)
             print redisData
             if redisData is not None:
@@ -140,6 +142,7 @@ def getOriginData(request):
                 elif isImage:
                     contentType = 'image/jpeg'
                 return HttpResponse(redisData,content_type=contentType)
+            endTime = time.time()
 
 # Create your views here.
 def q(request):
