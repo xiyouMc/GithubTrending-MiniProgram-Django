@@ -110,13 +110,12 @@ def _redis_push(key, values):
     r = _redis_._redis_()
     return r.rpush(key, values)
 
-
 def getOriginData(request):
     url = request.GET['url']
     print url
     redisData = _get_redis_task(url)
     isVideo = 'mp4' in url
-    isImage = 'png' or 'jpg' or 'jpeg' in url
+    isImage = 'png' in url or 'jpg' in url or 'jpeg' in url
     print redisData
     if redisData is not None:
         contentType = ''
